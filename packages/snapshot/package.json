@@ -1,0 +1,14 @@
+{
+  "name": "@time-capsule/snapshot",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@time-capsule/schema": "workspace:*",
+    "undici": "7.30.1"
+  }
+}

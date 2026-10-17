@@ -1,0 +1,146 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bh-inf.github.io/time-capsule-snapshots/v1/schema/snapshot-v1.0.json",
+  "title": "Family time capsule daily world snapshot v1.0 reader",
+  "description": "Frozen minor-0 reader. Trends and later optional fields are not declared here. additionalProperties stays true so this reader accepts newer minor documents.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema",
+    "schema_version",
+    "region",
+    "date",
+    "generated_at",
+    "news",
+    "weather",
+    "songs",
+    "prices",
+    "missing",
+    "signature"
+  ],
+  "properties": {
+    "schema": { "type": "string", "pattern": "^https://\\S+$" },
+    "schema_version": { "const": 1 },
+    "region": { "type": "string", "pattern": "^[A-Z]{2}$" },
+    "date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "generated_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(Z|[+-][0-9]{2}:[0-9]{2})$"
+    },
+    "news": { "$ref": "#/definitions/news" },
+    "weather": { "$ref": "#/definitions/weather" },
+    "songs": { "$ref": "#/definitions/songs" },
+    "prices": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/price" }
+    },
+    "missing": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 64 }
+    },
+    "signature": { "$ref": "#/definitions/signature" }
+  },
+  "definitions": {
+    "headline": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["title", "source", "url", "fetched_at"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "source": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "url": { "type": "string", "pattern": "^https://\\S+$", "maxLength": 2000 },
+        "fetched_at": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(Z|[+-][0-9]{2}:[0-9]{2})$"
+        }
+      }
+    },
+    "news": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["taiwan", "world"],
+      "properties": {
+        "taiwan": { "type": "array", "items": { "$ref": "#/definitions/headline" } },
+        "world": { "type": "array", "items": { "$ref": "#/definitions/headline" } }
+      }
+    },
+    "county": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["name", "t_min_c", "t_max_c", "summary", "note"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "t_min_c": { "type": "number" },
+        "t_max_c": { "type": "number" },
+        "summary": { "type": "string" },
+        "note": { "type": ["string", "null"] }
+      }
+    },
+    "weather": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["source", "by_county"],
+      "properties": {
+        "source": { "type": "string" },
+        "by_county": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/definitions/county" }
+        }
+      }
+    },
+    "song": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["rank", "title", "artist", "url"],
+      "properties": {
+        "rank": { "type": "integer", "minimum": 1 },
+        "title": { "type": "string" },
+        "artist": { "type": "string" },
+        "url": { "type": "string", "pattern": "^https://\\S+$" }
+      }
+    },
+    "songs": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["source", "chart_date", "items"],
+      "properties": {
+        "source": { "type": ["string", "null"] },
+        "chart_date": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" }
+          ]
+        },
+        "items": { "type": "array", "items": { "$ref": "#/definitions/song" } }
+      }
+    },
+    "price": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["key", "label", "value", "unit", "as_of", "source"],
+      "properties": {
+        "key": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "label": { "type": "string" },
+        "value": { "type": "number" },
+        "unit": { "type": "string", "minLength": 1 },
+        "as_of": { "type": "string", "minLength": 4 },
+        "source": { "type": "string", "minLength": 1 }
+      }
+    },
+    "signature": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": true,
+          "required": ["alg", "key_id", "sig"],
+          "properties": {
+            "alg": { "const": "ed25519" },
+            "key_id": { "type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$" },
+            "sig": { "type": "string", "pattern": "^[A-Za-z0-9+/]+={0,2}$" }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "https://bh-inf.github.io/time-capsule-snapshots/v1/schema/snapshot-v1.1.json",
+  "schema_version": 1,
+  "region": "TW",
+  "date": "2026-10-16",
+  "generated_at": "2026-10-16T21:31:07+08:00",
+  "news": {
+    "taiwan": [
+      {
+        "title": "（測試）行政院標題",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-16T21:30:12+08:00"
+      }
+    ],
+    "world": []
+  },
+  "weather": {
+    "source": "中央氣象署",
+    "by_county": {
+      "TPE": {
+        "name": "臺北市",
+        "t_min_c": 21,
+        "t_max_c": 27,
+        "summary": "多雲",
+        "note": null
+      }
+    }
+  },
+  "songs": {
+    "source": null,
+    "chart_date": null,
+    "items": []
+  },
+  "prices": [],
+  "missing": ["prices", "songs"],
+  "signature": null
+}
