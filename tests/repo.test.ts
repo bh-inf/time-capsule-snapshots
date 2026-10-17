@@ -96,12 +96,19 @@ describe("publish script", () => {
     git(["commit", "-m", "init"]);
     git(["push", "origin", "HEAD:main"]);
     const before = execFileSync("git", ["rev-parse", "main"], { cwd: bare, encoding: "utf8" });
+    const publishEnv = {
+      ...process.env,
+      GITHUB_REF: "refs/heads/main",
+      SNAPSHOT_PUBLISH_REMOTE: bare,
+    };
 
     const bad = join(dir, "bad");
     mkdirSync(join(bad, "v1", "TW", "2026"), { recursive: true });
     writeFileSync(join(bad, "v1", "TW", "2026", "2026-10-18.json"), '{"ok": true,\n<<<<<<<\n}\n');
     writeFileSync(join(bad, "v1", "TW", "index.json"), '{"schema_version":1,"region":"TW","dates":["2026-10-18"],"latest":"2026-10-18"}\n');
-    expect(() => execFileSync("bash", ["scripts/publish-snapshot.sh", bad, "."], { cwd: work })).toThrow();
+    expect(() =>
+      execFileSync("bash", ["scripts/publish-snapshot.sh", bad, "."], { cwd: work, env: publishEnv }),
+    ).toThrow();
     expect(execFileSync("git", ["rev-parse", "main"], { cwd: bare, encoding: "utf8" })).toBe(before);
 
     const good = join(dir, "good");
@@ -110,7 +117,7 @@ describe("publish script", () => {
     writeFileSync(join(good, "v1", "TW", "index.json"), '{"schema_version":1,"region":"TW","dates":["2026-10-18"],"latest":"2026-10-18"}\n');
     execFileSync("bash", ["scripts/publish-snapshot.sh", good, "."], {
       cwd: work,
-      env: { ...process.env, SNAPSHOT_PUBLISH_REMOTE: bare },
+      env: publishEnv,
     });
     const published = execFileSync("git", ["show", "main:v1/TW/2026/2026-10-18.json"], { cwd: bare, encoding: "utf8" });
     expect(published).toContain("2026-10-18");
@@ -123,7 +130,7 @@ describe("publish script", () => {
     expect(() =>
       execFileSync("bash", ["scripts/publish-snapshot.sh", changed, "."], {
         cwd: work,
-        env: { ...process.env, SNAPSHOT_PUBLISH_REMOTE: bare },
+        env: publishEnv,
       }),
     ).toThrow();
   });
