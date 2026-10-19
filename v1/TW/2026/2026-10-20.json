@@ -1,0 +1,356 @@
+{
+  "schema": "https://bh-inf.github.io/time-capsule-snapshots/v1/schema/snapshot-v1.1.json",
+  "schema_version": 1,
+  "schema_minor": 1,
+  "region": "TW",
+  "date": "2026-10-20",
+  "generated_at": "2026-10-20T03:26:22+08:00",
+  "news": {
+    "taiwan": [
+      {
+        "title": "訪視雲林青農創業成果 卓揆盼複製成功經驗 完善青農輔導與糧食儲備體系",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-20T03:26:22+08:00"
+      },
+      {
+        "title": "115年全民運動會桃園熱鬧登場 卓揆期許競技運動向下扎根、落實全民運動精神",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-20T03:26:22+08:00"
+      },
+      {
+        "title": "荖濃溪（里嶺）伏流水工程竣工 卓揆：每日增加供水10萬噸 穩定南部地區民生及產業用水",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-20T03:26:22+08:00"
+      },
+      {
+        "title": "卓揆：跨部會及與美方合作攔截1,500公斤愷他命 展現臺灣打擊跨境犯罪實力",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-20T03:26:22+08:00"
+      },
+      {
+        "title": "出席世華總會會長交接典禮 卓揆期許女性企業家持續發揮影響力 擔任臺灣與世界經貿的重要橋梁",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-20T03:26:22+08:00"
+      },
+      {
+        "title": "政院同意會銜司法院《法院組織法》部分條文及第11條附表、第33條附表、第73條附表、第74條附表修正草案",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-20T03:26:22+08:00"
+      },
+      {
+        "title": "卓揆：推動「全齡、全病程、全支持」失智照護 及早達成「失智友善臺灣888」願景",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-20T03:26:22+08:00"
+      },
+      {
+        "title": "卓揆：四大面向強化高齡者福利照顧措施 落實「健康老化、在地安老、安寧善終」願景",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-20T03:26:22+08:00"
+      }
+    ],
+    "world": [
+      {
+        "title": "卢比奥：美国希望结束俄乌战争",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/rubio-says-us-wants-to-bring-end-to-russia-ukraine-war-20261019/8212810.html",
+        "fetched_at": "2026-10-20T03:26:22+08:00"
+      },
+      {
+        "title": "美国陆军太平洋司令拟在印太增强军力，以遏止战争",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/us-army-s-pacific-chief-wants-to-show-off-military-strength-in-asia-to-keep-war-at-bay-20261019/8212748.html",
+        "fetched_at": "2026-10-20T03:26:22+08:00"
+      },
+      {
+        "title": "加拿大一军事基地发生事故，引发严重火灾，造成4名军人死亡，数十人受伤",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/major-fire-breaks-out-in-alberta-after-deadly-incident-at-canadian-military-base-20261018/8212522.html",
+        "fetched_at": "2026-10-20T03:26:22+08:00"
+      },
+      {
+        "title": "朝鲜声称试射了新型人工智能辅助鱼雷武器系统",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/north-korea-says-it-tested-new-torpedo-system-with-ai-capabilities-20261017/8212304.html",
+        "fetched_at": "2026-10-20T03:26:22+08:00"
+      },
+      {
+        "title": "美陆军年会展示先进武器 多款新系统具台海防卫潜力",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/ausa-2026-showcases-advanced-defense-systems-with-tactical-applications-for-a-potential-taiwan-strait-conflict-20261016/8212237.html",
+        "fetched_at": "2026-10-20T03:26:22+08:00"
+      },
+      {
+        "title": "特朗普称乌克兰总统“比普京更难打交道”，泽连斯基回应说自己在捍卫乌克兰的利益",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/trump-says-ukraine-s-zelenskyy-more-difficult-to-deal-with-than-putin-zelenskyy-responds-he-s-defending-ukraine-s-interests-20261016/8212115.html",
+        "fetched_at": "2026-10-20T03:26:22+08:00"
+      },
+      {
+        "title": "高市早苗称“允许美军携核武进入日本”有探讨空间，学者：有助震慑中国",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/japan-weighs-letting-us-nuclear-armed-ships-into-port-in-a-crisis-20261016/8212097.html",
+        "fetched_at": "2026-10-20T03:26:22+08:00"
+      },
+      {
+        "title": "台湾拟收紧对中国芯片出口管制与美接轨，北京也宣布限制人工智能技术出口",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/taiwan-to-curb-ai-chip-exports-to-china-as-beijing-too-limits-its-tech-export-20261016/8212027.html",
+        "fetched_at": "2026-10-20T03:26:22+08:00"
+      }
+    ],
+    "attributions": [
+      {
+        "source": "行政院",
+        "license": "政府資料開放授權條款－第1版。使用時應註明出處。",
+        "url": "https://data.gov.tw/license"
+      },
+      {
+        "source": "VOA",
+        "license": "VOA 自製內容屬於公有領域，引用請註明 VOA。已排除 AP、Reuters、AFP 素材。",
+        "url": "https://www.voanews.com/p/5338.html"
+      }
+    ],
+    "filtered_wire_services": 0
+  },
+  "weather": {
+    "source": "中央氣象署",
+    "attribution": "中央氣象署開放資料（氣象資料開放平台）",
+    "by_county": {
+      "CYQ": {
+        "name": "嘉義縣",
+        "t_min_c": 23,
+        "t_max_c": 25,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "NWT": {
+        "name": "新北市",
+        "t_min_c": 25,
+        "t_max_c": 27,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "CYI": {
+        "name": "嘉義市",
+        "t_min_c": 23,
+        "t_max_c": 24,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "HSQ": {
+        "name": "新竹縣",
+        "t_min_c": 24,
+        "t_max_c": 25,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "HSZ": {
+        "name": "新竹市",
+        "t_min_c": 24,
+        "t_max_c": 25,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "TPE": {
+        "name": "臺北市",
+        "t_min_c": 25,
+        "t_max_c": 27,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "TNN": {
+        "name": "臺南市",
+        "t_min_c": 25,
+        "t_max_c": 26,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "ILA": {
+        "name": "宜蘭縣",
+        "t_min_c": 23,
+        "t_max_c": 25,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "MIA": {
+        "name": "苗栗縣",
+        "t_min_c": 22,
+        "t_max_c": 24,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "YUN": {
+        "name": "雲林縣",
+        "t_min_c": 23,
+        "t_max_c": 25,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "HUA": {
+        "name": "花蓮縣",
+        "t_min_c": 24,
+        "t_max_c": 26,
+        "summary": "多雲時晴",
+        "note": null
+      },
+      "TXG": {
+        "name": "臺中市",
+        "t_min_c": 24,
+        "t_max_c": 26,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "TTT": {
+        "name": "臺東縣",
+        "t_min_c": 25,
+        "t_max_c": 26,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "TAO": {
+        "name": "桃園市",
+        "t_min_c": 24,
+        "t_max_c": 26,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "NAN": {
+        "name": "南投縣",
+        "t_min_c": 23,
+        "t_max_c": 25,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "KHH": {
+        "name": "高雄市",
+        "t_min_c": 26,
+        "t_max_c": 28,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "KIN": {
+        "name": "金門縣",
+        "t_min_c": 25,
+        "t_max_c": 25,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "PIF": {
+        "name": "屏東縣",
+        "t_min_c": 25,
+        "t_max_c": 27,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "KEE": {
+        "name": "基隆市",
+        "t_min_c": 25,
+        "t_max_c": 26,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "PEN": {
+        "name": "澎湖縣",
+        "t_min_c": 25,
+        "t_max_c": 26,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "CHA": {
+        "name": "彰化縣",
+        "t_min_c": 24,
+        "t_max_c": 25,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "LIE": {
+        "name": "連江縣",
+        "t_min_c": 24,
+        "t_max_c": 25,
+        "summary": "多雲時陰",
+        "note": null
+      }
+    }
+  },
+  "songs": {
+    "source": null,
+    "chart_date": null,
+    "items": [],
+    "status": "unavailable",
+    "note": "尚無允許公開再散布的排行榜來源"
+  },
+  "prices": [],
+  "trends": {
+    "source": "Google Trends",
+    "attribution": "Google Trends。依 Google 服務條款使用；再使用時請註明 Google。https://support.google.com/trends/answer/4365538?hl=en",
+    "items": [
+      {
+        "rank": 1,
+        "term": "意甲",
+        "url": "https://trends.google.com/trends/explore?q=%E6%84%8F%E7%94%B2&geo=TW"
+      },
+      {
+        "rank": 2,
+        "term": "澎湖 發票",
+        "url": "https://trends.google.com/trends/explore?q=%E6%BE%8E%E6%B9%96+%E7%99%BC%E7%A5%A8&geo=TW"
+      },
+      {
+        "rank": 3,
+        "term": "休假",
+        "url": "https://trends.google.com/trends/explore?q=%E4%BC%91%E5%81%87&geo=TW"
+      },
+      {
+        "rank": 4,
+        "term": "金正恩",
+        "url": "https://trends.google.com/trends/explore?q=%E9%87%91%E6%AD%A3%E6%81%A9&geo=TW"
+      },
+      {
+        "rank": 5,
+        "term": "死神",
+        "url": "https://trends.google.com/trends/explore?q=%E6%AD%BB%E7%A5%9E&geo=TW"
+      },
+      {
+        "rank": 6,
+        "term": "達科塔強森",
+        "url": "https://trends.google.com/trends/explore?q=%E9%81%94%E7%A7%91%E5%A1%94%E5%BC%B7%E6%A3%AE&geo=TW"
+      },
+      {
+        "rank": 7,
+        "term": "傅子纯",
+        "url": "https://trends.google.com/trends/explore?q=%E5%82%85%E5%AD%90%E7%BA%AF&geo=TW"
+      },
+      {
+        "rank": 8,
+        "term": "楊閔涵",
+        "url": "https://trends.google.com/trends/explore?q=%E6%A5%8A%E9%96%94%E6%B6%B5&geo=TW"
+      },
+      {
+        "rank": 9,
+        "term": "張菲",
+        "url": "https://trends.google.com/trends/explore?q=%E5%BC%B5%E8%8F%B2&geo=TW"
+      },
+      {
+        "rank": 10,
+        "term": "陳意涵",
+        "url": "https://trends.google.com/trends/explore?q=%E9%99%B3%E6%84%8F%E6%B6%B5&geo=TW"
+      }
+    ]
+  },
+  "missing": [
+    "prices",
+    "songs"
+  ],
+  "signature": {
+    "alg": "ed25519",
+    "key_id": "2026-10",
+    "sig": "vdsrIjWD7zQn9+xNDCTYwEtGD2OLDbKWFP1S2N457nxRgGPu+gckCj3xiIHZDyPqCF30KpvH7NiAnVjcteqwBg=="
+  }
+}
