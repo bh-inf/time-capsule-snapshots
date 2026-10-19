@@ -22,8 +22,6 @@ jobs:
     env:
       SNAPSHOT_REQUIRE_SIGNATURE: "1"
       SNAPSHOT_SIGNING_KEY_ID: ${{ vars.SNAPSHOT_SIGNING_KEY_ID }}
-      SNAPSHOT_SIGNING_KEY_HEX: ${{ secrets.SNAPSHOT_SIGNING_KEY_HEX }}
-      CWA_API_KEY: ${{ secrets.CWA_API_KEY }}
       SNAPSHOT_OUTPUT_DIR: ${{ github.workspace }}/snapshot-out
     steps:
       - uses: step-security/harden-runner@ccd8616d44fd3846e67624a50d5aad6d37bf2d25
@@ -38,9 +36,15 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile --ignore-scripts
+      # Secrets are passed only to the steps that need them, not to install or third-party actions.
       - name: Canary
+        env:
+          CWA_API_KEY: ${{ secrets.CWA_API_KEY }}
         run: pnpm snapshot:canary
       - name: Collect and sign
+        env:
+          CWA_API_KEY: ${{ secrets.CWA_API_KEY }}
+          SNAPSHOT_SIGNING_KEY_HEX: ${{ secrets.SNAPSHOT_SIGNING_KEY_HEX }}
         run: pnpm snapshot:collect
       - name: Parse collected JSON before upload
         run: python3 scripts/pre-push-check.py snapshot-out
