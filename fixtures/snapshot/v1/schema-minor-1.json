@@ -1,0 +1,54 @@
+{
+  "schema": "https://bh-inf.github.io/time-capsule-snapshots/v1/schema/snapshot-v1.1.json",
+  "schema_version": 1,
+  "schema_minor": 1,
+  "region": "TW",
+  "date": "2026-10-16",
+  "generated_at": "2026-10-16T21:31:07+08:00",
+  "note_for_future_readers": "drop me",
+  "news": {
+    "taiwan": [],
+    "world": [
+      {
+        "title": "（測試）VOA 標題",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/example",
+        "fetched_at": "2026-10-16T21:30:14+08:00",
+        "body_not_stored": "全文不進快照"
+      }
+    ],
+    "attributions": [
+      {
+        "source": "VOA",
+        "license": "VOA 自製內容屬於公有領域，引用請註明 VOA。",
+        "url": "https://www.voanews.com/p/5338.html"
+      }
+    ]
+  },
+  "weather": {
+    "source": "中央氣象署",
+    "by_county": {}
+  },
+  "songs": {
+    "source": null,
+    "chart_date": null,
+    "items": [],
+    "status": "unavailable"
+  },
+  "prices": [],
+  "trends": {
+    "source": "Google Trends",
+    "attribution": "Google Trends。依 Google 服務條款使用；再使用時請註明 Google。",
+    "items": [
+      {
+        "rank": 1,
+        "term": "測試搜尋",
+        "url": "https://trends.google.com/trends/explore?q=%E6%B8%AC%E8%A9%A6&geo=JP",
+        "news_title_not_stored": "趨勢新聞標題不進快照",
+        "picture_not_stored": "https://example.com/image.jpg"
+      }
+    ]
+  },
+  "missing": ["prices", "songs"],
+  "signature": null
+}

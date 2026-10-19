@@ -1,0 +1,80 @@
+name: snapshot
+
+on:
+  schedule:
+    - cron: "30 13 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: snapshot-publish
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: snapshot-publish
+    permissions:
+      contents: read
+    env:
+      SNAPSHOT_REQUIRE_SIGNATURE: "1"
+      SNAPSHOT_SIGNING_KEY_ID: ${{ vars.SNAPSHOT_SIGNING_KEY_ID }}
+      SNAPSHOT_OUTPUT_DIR: ${{ github.workspace }}/snapshot-out
+    steps:
+      - uses: step-security/harden-runner@ccd8616d44fd3846e67624a50d5aad6d37bf2d25
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      # Secrets are passed only to the steps that need them, not to install or third-party actions.
+      - name: Canary
+        env:
+          CWA_API_KEY: ${{ secrets.CWA_API_KEY }}
+        run: pnpm snapshot:canary
+      - name: Collect and sign
+        env:
+          CWA_API_KEY: ${{ secrets.CWA_API_KEY }}
+          SNAPSHOT_SIGNING_KEY_HEX: ${{ secrets.SNAPSHOT_SIGNING_KEY_HEX }}
+        run: pnpm snapshot:collect
+      - name: Parse collected JSON before upload
+        run: python3 scripts/pre-push-check.py snapshot-out
+      - name: Report date gaps
+        continue-on-error: true
+        run: pnpm snapshot:gaps
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: snapshot-out
+          path: snapshot-out
+          if-no-files-found: error
+          retention-days: 1
+
+  publish:
+    needs: collect
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: snapshot-publish
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: snapshot-out
+          path: snapshot-out
+      - name: Commit, rebase, and push with the deploy key
+        env:
+          SNAPSHOT_DEPLOY_KEY: ${{ secrets.SNAPSHOT_DEPLOY_KEY }}
+        run: bash scripts/publish-snapshot.sh snapshot-out .

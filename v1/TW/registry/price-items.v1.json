@@ -1,0 +1,33 @@
+{
+  "registry_version": 1,
+  "region": "TW",
+  "items": [
+    {
+      "key": "egg_kg",
+      "label": "雞蛋（每公斤，產地參考價）",
+      "unit": "TWD/kg",
+      "definition": "農業部公開之雞蛋產地價格，每公斤新臺幣。介面須標示為參考價，不是零售價。",
+      "valid_from": "2026-01-01",
+      "valid_to": null,
+      "category": "food.staple"
+    },
+    {
+      "key": "mrt_tpe_min_fare",
+      "label": "台北捷運最低票價",
+      "unit": "TWD/trip",
+      "definition": "臺北捷運單一票種最低成人票價，以官方公告為準。票價結構改變時新增鍵名，不改本鍵的意義。",
+      "valid_from": "2026-01-01",
+      "valid_to": null,
+      "category": "transport"
+    },
+    {
+      "key": "bento_tpe",
+      "label": "台北一般便當",
+      "unit": "TWD",
+      "definition": "人工抽樣的臺北市一般便當價格。沒有每日開放資料時，以 as_of 標示實際調查月份，不假裝每日更新。",
+      "valid_from": "2026-01-01",
+      "valid_to": null,
+      "category": "food.staple"
+    }
+  ]
+}

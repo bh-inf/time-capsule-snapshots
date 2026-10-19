@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "latest": "snapshot-v1.1.json",
+  "files": {
+    "0": "snapshot-v1.0.json",
+    "1": "snapshot-v1.1.json"
+  }
+}

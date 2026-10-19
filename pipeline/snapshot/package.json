@@ -1,0 +1,17 @@
+{
+  "name": "@time-capsule/pipeline",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "canary": "tsx src/main.ts canary",
+    "collect": "tsx src/main.ts collect",
+    "gaps": "tsx src/main.ts gaps"
+  },
+  "dependencies": {
+    "@time-capsule/schema": "workspace:*",
+    "@time-capsule/snapshot": "workspace:*",
+    "tsx": "4.23.15"
+  }
+}

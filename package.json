@@ -1,0 +1,31 @@
+{
+  "name": "time-capsule-snapshots",
+  "private": true,
+  "license": "MIT",
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@10.33.4",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "audit": "pnpm audit --audit-level=moderate",
+    "licenses:check": "node scripts/check-licenses.mjs",
+    "snapshot:canary": "pnpm --filter @time-capsule/pipeline canary",
+    "snapshot:collect": "pnpm --filter @time-capsule/pipeline collect",
+    "snapshot:gaps": "pnpm --filter @time-capsule/pipeline gaps"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.1",
+    "typescript": "5.9.3",
+    "vite": "6.4.4",
+    "vitest": "4.1.12"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "6.4.4"
+    }
+  }
+}
