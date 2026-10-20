@@ -19,7 +19,7 @@ import {
   type RegionProfile,
 } from "./sources.ts";
 import type { Headline, Snapshot } from "./normalize.ts";
-import { SongsParseError, collectKkboxSongs, type KkboxCredentials } from "./songs.ts";
+import { collectKkboxSongs, type KkboxCredentials } from "./songs.ts";
 
 const HEADLINE_LIMIT = 8;
 const TREND_LIMIT = 10;
@@ -40,6 +40,8 @@ export type CollectOptions = {
   priceObservations?: Snapshot["prices"];
   /** Optional. Without it the songs section stays unavailable. */
   kkbox?: KkboxCredentials;
+  /** Problems that do not stop publishing, such as a chart response that no longer parses. */
+  onWarning?: (message: string) => void;
 };
 
 type SourceResult<T> = { ok: true; value: T } | { ok: false };
@@ -289,11 +291,10 @@ export async function collectSnapshot(options: CollectOptions = {}): Promise<Sna
     collectWorld(options, generatedAt),
     collectWeather(options, now),
     collectTrends(options, region),
-    collectKkboxSongs(options.kkbox, { oneShot: options.oneShot, snapshotDate: date }).catch((error: unknown) => {
-      if (error instanceof SongsParseError) throw new SnapshotError(`canary parse failed for songs: ${error.message}`);
-      throw error;
-    }),
+    collectKkboxSongs(options.kkbox, { oneShot: options.oneShot, snapshotDate: date }),
   ]);
+  // Songs never block a day: news and weather cannot be fetched again later.
+  if (!songs.ok && songs.problem) options.onWarning?.(`songs parse failed: ${songs.problem}`);
   const networkOk = [taiwan.ok, world.ok, weather.ok, trends.ok].filter(Boolean).length;
   if (networkOk === 0) throw new SnapshotError("all network sources failed");
   const missing: string[] = [];
@@ -329,7 +330,11 @@ export async function collectSnapshot(options: CollectOptions = {}): Promise<Sna
           chart_date: null,
           items: [],
           status: "unavailable",
-          note: songs.configured ? "排行榜抓取失敗" : "尚無允許公開再散布的排行榜來源",
+          note: !songs.configured
+            ? "尚無允許公開再散布的排行榜來源"
+            : songs.problem
+              ? "排行榜格式改變，這天沒有記錄"
+              : "排行榜抓取失敗",
         },
     prices,
     trends: {

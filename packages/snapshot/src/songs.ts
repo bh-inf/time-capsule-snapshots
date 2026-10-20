@@ -16,9 +16,9 @@ export type SongItem = Snapshot["songs"]["items"][number];
 
 export type SongsResult =
   | { ok: true; value: Pick<Snapshot["songs"], "source" | "chart_date" | "items"> }
-  | { ok: false; configured: boolean };
+  | { ok: false; configured: boolean; problem?: string };
 
-/** Thrown when a 2xx response no longer has the shape we parse. Fails the canary. */
+/** A 2xx response that no longer has the shape we parse. */
 export class SongsParseError extends Error {
   constructor(message: string) {
     super(message);
@@ -154,7 +154,9 @@ export async function collectKkboxSongs(
       },
     };
   } catch (error) {
-    if (error instanceof SongsParseError) throw new SongsParseError(scrubSecrets(error.message, secrets));
+    if (error instanceof SongsParseError) {
+      return { ok: false, configured: true, problem: scrubSecrets(error.message, secrets) };
+    }
     return { ok: false, configured: true };
   }
 }

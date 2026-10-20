@@ -128,9 +128,13 @@ describe("KKBOX songs", () => {
     expect(result).toEqual({ ok: false, configured: true });
   });
 
-  it("fails the canary when KKBOX changes its response shape", async () => {
+  it("warns but still publishes the day when KKBOX changes its response shape", async () => {
     const network = kkbox({ charts: JSON.stringify({ data: [{ id: "x", title: "別的榜" }] }) });
-    await expect(collectSnapshot({ now: NOW, kkbox: CREDS, oneShot: network.oneShot })).rejects.toThrow(/canary parse failed for songs/);
+    const warnings: string[] = [];
+    const snapshot = await collectSnapshot({ now: NOW, kkbox: CREDS, oneShot: network.oneShot, onWarning: (m) => warnings.push(m) });
+    expect(warnings).toEqual(["songs parse failed: charts: no 華語單曲日榜"]);
+    expect(snapshot.songs).toMatchObject({ items: [], status: "unavailable", note: "排行榜格式改變，這天沒有記錄" });
+    expect(snapshot.missing).toContain("songs");
     expect(() => parseKkboxTracks(JSON.stringify({ data: [{ name: "只有歌名" }] }))).toThrow(/no usable rows/);
     expect(() => parseKkboxCharts("<html>")).toThrow(/not JSON/);
   });

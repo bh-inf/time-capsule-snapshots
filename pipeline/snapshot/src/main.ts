@@ -19,6 +19,7 @@ async function runCollect(write: boolean): Promise<void> {
       clientSecret: process.env.KKBOX_CLIENT_SECRET ?? "",
     },
     requireConfiguredSources: required,
+    onWarning: (message) => console.log(`::warning::${message}`),
   });
   if (!write) {
     console.log(JSON.stringify({ ok: true, canary: true, date: snapshot.date, missing: snapshot.missing }));
