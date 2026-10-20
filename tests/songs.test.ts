@@ -168,4 +168,14 @@ describe("KKBOX songs", () => {
     ).rejects.toThrow(/redirect after POST/);
     expect(calls).toHaveLength(1);
   });
+
+  it("keeps only the top three", () => {
+    const rows = [1, 2, 3, 4, 5].map((n) => ({
+      id: `id${n}`,
+      name: `歌${n}`,
+      url: `https://www.kkbox.com/tw/tc/song/id${n}`,
+      album: { artist: { name: `歌手${n}` } },
+    }));
+    expect(parseKkboxTracks(JSON.stringify({ data: rows })).map((song) => song.rank)).toEqual([1, 2, 3]);
+  });
 });
