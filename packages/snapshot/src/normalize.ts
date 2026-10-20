@@ -43,7 +43,14 @@ export type Snapshot = {
   songs: {
     source: string | null;
     chart_date: string | null;
-    items: Array<{ rank: number; title: string; artist: string; url: string }>;
+    items: Array<{
+      rank: number;
+      title: string;
+      artist: string;
+      url: string;
+      isrc?: string;
+      provider_ids?: Record<string, string>;
+    }>;
     status?: string;
     note?: string;
   };
@@ -115,6 +122,14 @@ function signature(value: unknown): Snapshot["signature"] {
   return { alg: "ed25519", key_id: record.key_id, sig: record.sig };
 }
 
+function providerIds(value: unknown): { provider_ids: Record<string, string> } | null {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  const ids = Object.fromEntries(
+    Object.entries(value as Record<string, unknown>).filter((entry): entry is [string, string] => typeof entry[1] === "string"),
+  );
+  return { provider_ids: ids };
+}
+
 /** Project a document onto known fields. Unknown properties are dropped. */
 export function normalizeSnapshot(input: unknown): Snapshot {
   const record = asRecord(input);
@@ -174,6 +189,8 @@ export function normalizeSnapshot(input: unknown): Snapshot {
               title: String(song.title ?? ""),
               artist: String(song.artist ?? ""),
               url: String(song.url ?? ""),
+              ...(typeof song.isrc === "string" ? { isrc: song.isrc } : {}),
+              ...(providerIds(song.provider_ids) ?? {}),
             };
           })
         : [],

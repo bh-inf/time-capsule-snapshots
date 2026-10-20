@@ -40,10 +40,14 @@ jobs:
       - name: Canary
         env:
           CWA_API_KEY: ${{ secrets.CWA_API_KEY }}
+          KKBOX_CLIENT_ID: ${{ secrets.KKBOX_CLIENT_ID }}
+          KKBOX_CLIENT_SECRET: ${{ secrets.KKBOX_CLIENT_SECRET }}
         run: pnpm snapshot:canary
       - name: Collect and sign
         env:
           CWA_API_KEY: ${{ secrets.CWA_API_KEY }}
+          KKBOX_CLIENT_ID: ${{ secrets.KKBOX_CLIENT_ID }}
+          KKBOX_CLIENT_SECRET: ${{ secrets.KKBOX_CLIENT_SECRET }}
           SNAPSHOT_SIGNING_KEY_HEX: ${{ secrets.SNAPSHOT_SIGNING_KEY_HEX }}
         run: pnpm snapshot:collect
       - name: Parse collected JSON before upload

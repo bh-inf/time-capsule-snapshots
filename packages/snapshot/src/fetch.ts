@@ -86,7 +86,7 @@ export class HttpBytes {
 
 export type OneShot = (
   url: string,
-  init: { headers: Record<string, string>; signal: AbortSignal },
+  init: { headers: Record<string, string>; signal: AbortSignal; method?: "GET" | "POST"; body?: string },
 ) => Promise<HttpBytes>;
 
 export function redactUrl(input: string): string {
@@ -149,9 +149,10 @@ async function readBody(response: { body: ReadableStream<Uint8Array> | null }, m
 export function undiciOneShot(maxBytes: number, allowPrefix: boolean): OneShot {
   return async (url, init) => {
     const response = await undiciFetch(url, {
-      method: "GET",
+      method: init.method ?? "GET",
       redirect: "manual",
       headers: init.headers,
+      body: init.body,
       signal: init.signal,
       dispatcher: snapshotDispatcher(),
     });
@@ -182,14 +183,18 @@ export async function safeFetch(
     allowPrefix?: boolean;
     oneShot?: OneShot;
     secrets?: readonly string[];
+    /** A form POST. Never follows redirects, so the body is sent to exactly one URL. */
+    postForm?: Record<string, string>;
   },
 ): Promise<HttpBytes> {
   const maxBytes = options?.maxBytes ?? MAX_RESPONSE_BYTES;
   const allowPrefix = options?.allowPrefix ?? false;
   const oneShot = options?.oneShot ?? undiciOneShot(maxBytes, allowPrefix);
+  const form = options?.postForm ? new URLSearchParams(options.postForm).toString() : undefined;
   const headers = {
     "user-agent": USER_AGENT,
     accept: "application/json, application/rss+xml, application/xml, text/xml, */*",
+    ...(form === undefined ? {} : { "content-type": "application/x-www-form-urlencoded" }),
     ...options?.headers,
   };
   let current = assertPublicHttpsUrl(input);
@@ -198,12 +203,16 @@ export async function safeFetch(
     const signal = AbortSignal.timeout(REQUEST_TIMEOUT_MS);
     let response: HttpBytes;
     try {
-      response = await oneShot(current.toString(), { headers, signal });
+      response = await oneShot(
+        current.toString(),
+        form === undefined ? { headers, signal } : { headers, signal, method: "POST", body: form },
+      );
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       throw new Error(scrubSecrets(`${message} (${redactUrl(current.toString())})`, options?.secrets ?? []));
     }
     if (response.status >= 300 && response.status < 400) {
+      if (form !== undefined) throw new Error("refusing to follow a redirect after POST");
       if (hop === MAX_REDIRECTS) throw new Error("too many redirects");
       const next = locationOf(current, response.headers);
       assertPublicHttpsUrl(next.toString());

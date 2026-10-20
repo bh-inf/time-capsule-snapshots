@@ -14,7 +14,12 @@ async function runCollect(write: boolean): Promise<void> {
   const snapshot = await collectSnapshot({
     now: process.env.SNAPSHOT_NOW ? new Date(process.env.SNAPSHOT_NOW) : new Date(),
     cwaApiKey: process.env.CWA_API_KEY,
+    kkbox: {
+      clientId: process.env.KKBOX_CLIENT_ID ?? "",
+      clientSecret: process.env.KKBOX_CLIENT_SECRET ?? "",
+    },
     requireConfiguredSources: required,
+    onWarning: (message) => console.log(`::warning::${message}`),
   });
   if (!write) {
     console.log(JSON.stringify({ ok: true, canary: true, date: snapshot.date, missing: snapshot.missing }));

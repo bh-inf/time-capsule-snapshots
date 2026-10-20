@@ -23,6 +23,14 @@ export {
   trendsRssUrl,
 } from "./sources.ts";
 export { SnapshotError, collectSnapshot, parseCwaForecast, parseExecutiveYuanTitles } from "./collect.ts";
+export {
+  KKBOX_CHART_TITLE,
+  SongsParseError,
+  collectKkboxSongs,
+  parseKkboxCharts,
+  parseKkboxToken,
+  parseKkboxTracks,
+} from "./songs.ts";
 export { normalizeSnapshot, type Snapshot } from "./normalize.ts";
 export {
   assertKeyId,
