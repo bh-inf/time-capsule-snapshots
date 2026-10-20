@@ -21,9 +21,10 @@ describe("frozen schema and registry", () => {
     expect(read("v1/TW/registry/price-items.v1.json")).toBe(registry);
     const parsed = JSON.parse(registry) as { items: Array<{ key: string; unit: string; definition: string }> };
     expect(parsed.items.map((item) => [item.key, item.unit])).toEqual([
+      ["egg_origin_catty", "TWD/catty"],
       ["egg_kg", "TWD/kg"],
       ["mrt_tpe_min_fare", "TWD/trip"],
-      ["bento_tpe", "TWD"],
+      ["bento_tpe", "TWD/box"],
     ]);
     for (const item of parsed.items) expect(item.definition.length).toBeGreaterThan(10);
   });

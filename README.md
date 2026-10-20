@@ -1,6 +1,6 @@
 # time-capsule-snapshots
 
-公開的每日世界快照歸檔。Collector 與排程從私有的家庭時光膠囊 repo 移到這裡，把 `v1/` 以不可變的日期檔寫進 `main`，再由 GitHub Pages 提供靜態檔。
+公開的每日世界快照歸檔。Collector 與排程把 `v1/` 以不可變的日期檔寫進 `main`，再由 GitHub Pages 提供靜態檔。
 
 `schema_version` 維持 1。新欄位只以選用欄位加入，並提高 `schema_minor`。已發布的 `v1/<地區>/<年>/<YYYY-MM-DD>.json` 與 `v1/schema/snapshot-v1.<minor>.json` 只新增、不修改。
 
