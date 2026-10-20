@@ -16,7 +16,7 @@
 | `.github/workflows/snapshot.yml` | 每日 21:30（台北）蒐集並發布 |
 | `.github/workflows/ci.yml` | `typecheck`、`test`、`audit`、`license` |
 
-流行歌曲目前沒有可再散布的來源，`songs.status` 為 `unavailable`。價格欄位沒有數值，只保留品項定義。Threads 網域一律拒絕，不會發出請求。
+流行歌曲來自 KKBOX Open API 的「華語單曲日榜」前 10 名，只存歌名、歌手、名次、KKBOX 歌曲頁連結、ISRC 與 KKBOX 歌曲 ID，不存封面、試聽或串流網址。沒有設定 `KKBOX_CLIENT_ID`／`KKBOX_CLIENT_SECRET` 時不會發出請求，`songs.status` 為 `unavailable`。設定金鑰前，請先確認 KKBOX 開發者條款允許把這些欄位永久公開保存。價格欄位沒有數值，只保留品項定義。Threads 網域一律拒絕，不會發出請求。
 
 ## 出處
 
@@ -26,6 +26,7 @@
 | Google Trends | RSS `https://trends.google.com/trending/rss?geo=<地區>`。不抓 explore 頁，也不存新聞標題或圖片 | Google Trends。再使用時請註明 Google。https://support.google.com/trends/answer/4365538?hl=en |
 | 美國之音 | RSS `https://www.voachinese.com/api/zm_yql-vomx-tpeybti`。排除 AP、Reuters、AFP 素材 | VOA 自製內容屬於公有領域，引用請註明 VOA。https://www.voanews.com/p/5338.html |
 | 中央氣象署 | `F-C0032-001`，`Authorization` header，金鑰不進 URL | 中央氣象署開放資料（氣象資料開放平台） |
+| KKBOX | Open API `client_credentials` 取 token，`/v1.1/charts?territory=TW` 依標題找「華語單曲日榜」，再取 `/charts/<id>/tracks` 前 10 名。金鑰與 token 不進 URL | KKBOX，`songs.source` 為 `KKBOX 華語單曲日榜` |
 
 ## 每日 workflow 的 secret 與變數
 
@@ -35,6 +36,7 @@
 | --- | --- | --- | --- |
 | `SNAPSHOT_DEPLOY_KEY` | secret | `publish` | 只寫這個 repo 的 deploy key 私鑰。OpenSSH 或 PEM 原文，不要 base64。公開的 GitHub Actions token 沒有寫入權限 |
 | `CWA_API_KEY` | secret | `collect` | 中央氣象署 API 的 `Authorization` header |
+| `KKBOX_CLIENT_ID`、`KKBOX_CLIENT_SECRET` | secret（選用） | `collect` | KKBOX Open API 應用程式憑證。沒設就不抓流行歌 |
 | `SNAPSHOT_SIGNING_KEY_HEX` | secret | `collect` | Ed25519 簽章私鑰。32-byte seed 的 64 個 hex，或 PKCS#8 hex。排程缺這把鑰匙會失敗，不會發布 `signature: null` |
 | `SNAPSHOT_SIGNING_KEY_ID` | environment **變數**（不是 secret） | `collect` | 形如 `2026-10`，沒有預設值。必須和已提交的 `v1/keys/<key_id>.hex` 檔名一致 |
 

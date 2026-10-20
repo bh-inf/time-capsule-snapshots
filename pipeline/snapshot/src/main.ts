@@ -14,6 +14,10 @@ async function runCollect(write: boolean): Promise<void> {
   const snapshot = await collectSnapshot({
     now: process.env.SNAPSHOT_NOW ? new Date(process.env.SNAPSHOT_NOW) : new Date(),
     cwaApiKey: process.env.CWA_API_KEY,
+    kkbox: {
+      clientId: process.env.KKBOX_CLIENT_ID ?? "",
+      clientSecret: process.env.KKBOX_CLIENT_SECRET ?? "",
+    },
     requireConfiguredSources: required,
   });
   if (!write) {

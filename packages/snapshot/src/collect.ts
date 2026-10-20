@@ -19,6 +19,7 @@ import {
   type RegionProfile,
 } from "./sources.ts";
 import type { Headline, Snapshot } from "./normalize.ts";
+import { SongsParseError, collectKkboxSongs, type KkboxCredentials } from "./songs.ts";
 
 const HEADLINE_LIMIT = 8;
 const TREND_LIMIT = 10;
@@ -37,6 +38,8 @@ export type CollectOptions = {
   cwaApiKey?: string;
   requireConfiguredSources?: boolean;
   priceObservations?: Snapshot["prices"];
+  /** Optional. Without it the songs section stays unavailable. */
+  kkbox?: KkboxCredentials;
 };
 
 type SourceResult<T> = { ok: true; value: T } | { ok: false };
@@ -281,11 +284,15 @@ export async function collectSnapshot(options: CollectOptions = {}): Promise<Sna
   if (options.requireConfiguredSources && !options.cwaApiKey?.trim()) {
     throw new SnapshotError("CWA_API_KEY is required");
   }
-  const [taiwan, world, weather, trends] = await Promise.all([
+  const [taiwan, world, weather, trends, songs] = await Promise.all([
     collectTaiwan(options, generatedAt),
     collectWorld(options, generatedAt),
     collectWeather(options, now),
     collectTrends(options, region),
+    collectKkboxSongs(options.kkbox, { oneShot: options.oneShot, snapshotDate: date }).catch((error: unknown) => {
+      if (error instanceof SongsParseError) throw new SnapshotError(`canary parse failed for songs: ${error.message}`);
+      throw error;
+    }),
   ]);
   const networkOk = [taiwan.ok, world.ok, weather.ok, trends.ok].filter(Boolean).length;
   if (networkOk === 0) throw new SnapshotError("all network sources failed");
@@ -296,7 +303,7 @@ export async function collectSnapshot(options: CollectOptions = {}): Promise<Sna
   if (!trends.ok) missing.push("trends");
   const prices = options.priceObservations ?? [];
   if (prices.length === 0) missing.push("prices");
-  missing.push("songs");
+  if (!songs.ok) missing.push("songs");
   return {
     schema: SCHEMA_URL,
     schema_version: 1,
@@ -315,13 +322,15 @@ export async function collectSnapshot(options: CollectOptions = {}): Promise<Sna
       attribution: CWA_ATTRIBUTION,
       by_county: weather.ok ? weather.value : {},
     },
-    songs: {
-      source: null,
-      chart_date: null,
-      items: [],
-      status: "unavailable",
-      note: "尚無允許公開再散布的排行榜來源",
-    },
+    songs: songs.ok
+      ? { ...songs.value, status: "ok" }
+      : {
+          source: null,
+          chart_date: null,
+          items: [],
+          status: "unavailable",
+          note: songs.configured ? "排行榜抓取失敗" : "尚無允許公開再散布的排行榜來源",
+        },
     prices,
     trends: {
       source: "Google Trends",
