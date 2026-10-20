@@ -8,7 +8,7 @@ export const KKBOX_TOKEN_URL = "https://account.kkbox.com/oauth2/token";
 export const KKBOX_API = "https://api.kkbox.com/v1.1";
 /** Chart playlists are matched by title; their IDs are not documented as stable. */
 export const KKBOX_CHART_TITLE = "華語單曲日榜";
-export const SONG_LIMIT = 10;
+export const SONG_LIMIT = 3;
 
 export type KkboxCredentials = { clientId: string; clientSecret: string };
 
