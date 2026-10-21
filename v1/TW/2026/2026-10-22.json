@@ -1,0 +1,356 @@
+{
+  "schema": "https://bh-inf.github.io/time-capsule-snapshots/v1/schema/snapshot-v1.1.json",
+  "schema_version": 1,
+  "schema_minor": 1,
+  "region": "TW",
+  "date": "2026-10-22",
+  "generated_at": "2026-10-22T02:12:07+08:00",
+  "news": {
+    "taiwan": [
+      {
+        "title": "政院嚴密掌握薔琵颱風動態 慎防強降雨及強風長浪 督促中央地方共同落實防災整備",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-22T02:12:07+08:00"
+      },
+      {
+        "title": "主持行政院永續會 卓揆：提升我國永續發展韌性 推動修訂政策綱領及發展目標",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-22T02:12:07+08:00"
+      },
+      {
+        "title": "出席僑務委員會議歡迎酒會 卓揆：建構韌性僑社 守護民主臺灣 打造海內外團結新時代",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-22T02:12:07+08:00"
+      },
+      {
+        "title": "出席2026臺灣全球招商論壇 卓揆：「招商、招親」並進 營造友善投資環境 向全球延攬人才",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-22T02:12:07+08:00"
+      },
+      {
+        "title": "馬太鞍溪北岸用地取得 陳金德：尊重地主及部落意願 洪氾區不強制徵收",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-22T02:12:07+08:00"
+      },
+      {
+        "title": "訪視雲林青農創業成果 卓揆盼複製成功經驗 完善青農輔導與糧食儲備體系",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-22T02:12:07+08:00"
+      },
+      {
+        "title": "115年全民運動會桃園熱鬧登場 卓揆期許競技運動向下扎根、落實全民運動精神",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-22T02:12:07+08:00"
+      },
+      {
+        "title": "荖濃溪（里嶺）伏流水工程竣工 卓揆：每日增加供水10萬噸 穩定南部地區民生及產業用水",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-22T02:12:07+08:00"
+      }
+    ],
+    "world": [
+      {
+        "title": "俄罗斯释放自2022年起被拘押的美国退休教师",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/russia-releases-retired-american-schoolteacher-detained-since-2022-20261021/8213689.html",
+        "fetched_at": "2026-10-22T02:12:07+08:00"
+      },
+      {
+        "title": "台湾国安局警告选举前夕中国的虚假信息战",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/taiwan-security-agency-flags-rise-in-chinese-disinformation-ahead-of-local-elections-20261021/8213624.html",
+        "fetched_at": "2026-10-22T02:12:07+08:00"
+      },
+      {
+        "title": "台湾起诉5人，指其为中国“跨境镇压”嘲讽习近平的台湾喜剧演员",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/taiwan-indicts-5-for-attack-on-comedian-who-satirized-china-s-xi-20261021/8213620.html",
+        "fetched_at": "2026-10-22T02:12:07+08:00"
+      },
+      {
+        "title": "台湾国防部高官参加美台国防工业会议，吁美台军工业合作建立印太非红供应链",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/taiwan-defense-official-urges-us-defense-industry-to-jointly-cooperate-with-its-industry-to-build-non-red-regional-supply-chain-20261020/8213417.html",
+        "fetched_at": "2026-10-22T02:12:07+08:00"
+      },
+      {
+        "title": "一文看懂：美国选举中的计票过程",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/explainer-counting-the-vote-in-us-elections-20261020/8213396.html",
+        "fetched_at": "2026-10-22T02:12:07+08:00"
+      },
+      {
+        "title": "特朗普第二任期已撤销逾30万签证，包括“参与或协助生育旅游“的外国公民",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/over-300k-visas-revoked-so-far-in-trump-s-second-term-state-department-announces-20261020/8213350.html",
+        "fetched_at": "2026-10-22T02:12:07+08:00"
+      },
+      {
+        "title": "英国将开展“防御性”空中行动，帮助保护沙特城市免受胡塞武装袭击",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/britain-to-conduct-defensive-air-operations-to-help-protect-saudi-cities-from-houthi-attacks-20261020/8213299.html",
+        "fetched_at": "2026-10-22T02:12:07+08:00"
+      },
+      {
+        "title": "五角大楼：初步安全审计完成，美大学终止80多个与中国实体的合作项目",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/pentagon-following-research-security-audits-us-universities-terminated-dozens-of-collaborations-with-chinese-entities-20261020/8213297.html",
+        "fetched_at": "2026-10-22T02:12:07+08:00"
+      }
+    ],
+    "attributions": [
+      {
+        "source": "行政院",
+        "license": "政府資料開放授權條款－第1版。使用時應註明出處。",
+        "url": "https://data.gov.tw/license"
+      },
+      {
+        "source": "VOA",
+        "license": "VOA 自製內容屬於公有領域，引用請註明 VOA。已排除 AP、Reuters、AFP 素材。",
+        "url": "https://www.voanews.com/p/5338.html"
+      }
+    ],
+    "filtered_wire_services": 0
+  },
+  "weather": {
+    "source": "中央氣象署",
+    "attribution": "中央氣象署開放資料（氣象資料開放平台）",
+    "by_county": {
+      "CYQ": {
+        "name": "嘉義縣",
+        "t_min_c": 24,
+        "t_max_c": 25,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "NWT": {
+        "name": "新北市",
+        "t_min_c": 24,
+        "t_max_c": 25,
+        "summary": "陰時多雲短暫陣雨",
+        "note": null
+      },
+      "CYI": {
+        "name": "嘉義市",
+        "t_min_c": 23,
+        "t_max_c": 24,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "HSQ": {
+        "name": "新竹縣",
+        "t_min_c": 23,
+        "t_max_c": 24,
+        "summary": "多雲",
+        "note": null
+      },
+      "HSZ": {
+        "name": "新竹市",
+        "t_min_c": 23,
+        "t_max_c": 24,
+        "summary": "多雲",
+        "note": null
+      },
+      "TPE": {
+        "name": "臺北市",
+        "t_min_c": 23,
+        "t_max_c": 25,
+        "summary": "陰短暫陣雨",
+        "note": null
+      },
+      "TNN": {
+        "name": "臺南市",
+        "t_min_c": 25,
+        "t_max_c": 26,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "ILA": {
+        "name": "宜蘭縣",
+        "t_min_c": 22,
+        "t_max_c": 24,
+        "summary": "陰天",
+        "note": null
+      },
+      "MIA": {
+        "name": "苗栗縣",
+        "t_min_c": 22,
+        "t_max_c": 24,
+        "summary": "多雲",
+        "note": null
+      },
+      "YUN": {
+        "name": "雲林縣",
+        "t_min_c": 23,
+        "t_max_c": 24,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "HUA": {
+        "name": "花蓮縣",
+        "t_min_c": 25,
+        "t_max_c": 26,
+        "summary": "多雲",
+        "note": null
+      },
+      "TXG": {
+        "name": "臺中市",
+        "t_min_c": 24,
+        "t_max_c": 25,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "TTT": {
+        "name": "臺東縣",
+        "t_min_c": 24,
+        "t_max_c": 26,
+        "summary": "多雲",
+        "note": null
+      },
+      "TAO": {
+        "name": "桃園市",
+        "t_min_c": 23,
+        "t_max_c": 24,
+        "summary": "陰短暫陣雨",
+        "note": null
+      },
+      "NAN": {
+        "name": "南投縣",
+        "t_min_c": 23,
+        "t_max_c": 24,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "KHH": {
+        "name": "高雄市",
+        "t_min_c": 26,
+        "t_max_c": 28,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "KIN": {
+        "name": "金門縣",
+        "t_min_c": 23,
+        "t_max_c": 24,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "PIF": {
+        "name": "屏東縣",
+        "t_min_c": 25,
+        "t_max_c": 27,
+        "summary": "多雲",
+        "note": null
+      },
+      "KEE": {
+        "name": "基隆市",
+        "t_min_c": 23,
+        "t_max_c": 24,
+        "summary": "陰短暫陣雨",
+        "note": null
+      },
+      "PEN": {
+        "name": "澎湖縣",
+        "t_min_c": 25,
+        "t_max_c": 25,
+        "summary": "多雲時陰",
+        "note": null
+      },
+      "CHA": {
+        "name": "彰化縣",
+        "t_min_c": 24,
+        "t_max_c": 25,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "LIE": {
+        "name": "連江縣",
+        "t_min_c": 21,
+        "t_max_c": 23,
+        "summary": "陰天",
+        "note": null
+      }
+    }
+  },
+  "songs": {
+    "source": null,
+    "chart_date": null,
+    "items": [],
+    "status": "unavailable",
+    "note": "尚無允許公開再散布的排行榜來源"
+  },
+  "prices": [],
+  "trends": {
+    "source": "Google Trends",
+    "attribution": "Google Trends。依 Google 服務條款使用；再使用時請註明 Google。https://support.google.com/trends/answer/4365538?hl=en",
+    "items": [
+      {
+        "rank": 1,
+        "term": "曼聯",
+        "url": "https://trends.google.com/trends/explore?q=%E6%9B%BC%E8%81%AF&geo=TW"
+      },
+      {
+        "rank": 2,
+        "term": "新聞",
+        "url": "https://trends.google.com/trends/explore?q=%E6%96%B0%E8%81%9E&geo=TW"
+      },
+      {
+        "rank": 3,
+        "term": "calcio como đấu với man utd",
+        "url": "https://trends.google.com/trends/explore?q=calcio+como+%C4%91%E1%BA%A5u+v%E1%BB%9Bi+man+utd&geo=TW"
+      },
+      {
+        "rank": 4,
+        "term": "流星雨",
+        "url": "https://trends.google.com/trends/explore?q=%E6%B5%81%E6%98%9F%E9%9B%A8&geo=TW"
+      },
+      {
+        "rank": 5,
+        "term": "โกโม พบ แมนยู",
+        "url": "https://trends.google.com/trends/explore?q=%E0%B9%82%E0%B8%81%E0%B9%82%E0%B8%A1+%E0%B8%9E%E0%B8%9A+%E0%B9%81%E0%B8%A1%E0%B8%99%E0%B8%A2%E0%B8%B9&geo=TW"
+      },
+      {
+        "rank": 6,
+        "term": "como vs man utd",
+        "url": "https://trends.google.com/trends/explore?q=como+vs+man+utd&geo=TW"
+      },
+      {
+        "rank": 7,
+        "term": "科莫 對 曼聯",
+        "url": "https://trends.google.com/trends/explore?q=%E7%A7%91%E8%8E%AB+%E5%B0%8D+%E6%9B%BC%E8%81%AF&geo=TW"
+      },
+      {
+        "rank": 8,
+        "term": "bts 演唱會",
+        "url": "https://trends.google.com/trends/explore?q=bts+%E6%BC%94%E5%94%B1%E6%9C%83&geo=TW"
+      },
+      {
+        "rank": 9,
+        "term": "final fantasy resonance",
+        "url": "https://trends.google.com/trends/explore?q=final+fantasy+resonance&geo=TW"
+      },
+      {
+        "rank": 10,
+        "term": "meta財報",
+        "url": "https://trends.google.com/trends/explore?q=meta%E8%B2%A1%E5%A0%B1&geo=TW"
+      }
+    ]
+  },
+  "missing": [
+    "prices",
+    "songs"
+  ],
+  "signature": {
+    "alg": "ed25519",
+    "key_id": "2026-10",
+    "sig": "NjuAMATzi2m99uxma8Rx9+yqumeDkvLleRe4F/Y1+HJ0iCY59Mk5OlkTh0GrAWpJ5OSZB4rrbnpnyo7tIV64BA=="
+  }
+}
