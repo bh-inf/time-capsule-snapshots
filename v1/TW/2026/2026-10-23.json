@@ -1,0 +1,356 @@
+{
+  "schema": "https://bh-inf.github.io/time-capsule-snapshots/v1/schema/snapshot-v1.1.json",
+  "schema_version": 1,
+  "schema_minor": 1,
+  "region": "TW",
+  "date": "2026-10-23",
+  "generated_at": "2026-10-23T02:07:38+08:00",
+  "news": {
+    "taiwan": [
+      {
+        "title": "視導薔琵颱風中央災害應變中心 卓揆：中央地方攜手防災 全力確保民眾安全",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-23T02:07:38+08:00"
+      },
+      {
+        "title": "因應數起疑似跨境鎮壓事件 卓揆責成檢警調強化情資掌握 保障國人人身安全",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-23T02:07:38+08:00"
+      },
+      {
+        "title": "卓揆：儘速研擬第二階段租稅優惠TISA方案 鼓勵國人及早累積退休資產",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-23T02:07:38+08:00"
+      },
+      {
+        "title": "卓揆：建置智能韌性設施農業及農機輔導體系 加速農業升級轉型與氣候調適能力",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-23T02:07:38+08:00"
+      },
+      {
+        "title": "政院通過「專利法」部分條文修正草案 促進設計產業專利布局及發展",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-23T02:07:38+08:00"
+      },
+      {
+        "title": "卓揆：超前部署因應薔琵颱風 共同守護人民生命財產安全",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-23T02:07:38+08:00"
+      },
+      {
+        "title": "政院嚴密掌握薔琵颱風動態 慎防強降雨及強風長浪 督促中央地方共同落實防災整備",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-23T02:07:38+08:00"
+      },
+      {
+        "title": "主持行政院永續會 卓揆：提升我國永續發展韌性 推動修訂政策綱領及發展目標",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-10-23T02:07:38+08:00"
+      }
+    ],
+    "world": [
+      {
+        "title": "调查报告：中俄防务合作加速升级 美国应加大创新并协调制裁",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/china-russia-weapon-cooperation-c4ads-report-20261022/8213806.html",
+        "fetched_at": "2026-10-23T02:07:38+08:00"
+      },
+      {
+        "title": "菲律宾寻求与台湾合作，保护海底电缆不受中国“灰色地带”侵扰",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/philippines-exploring-deeper-cooperation-with-taiwan-to-protect-cables-20261022/8214028.html",
+        "fetched_at": "2026-10-23T02:07:38+08:00"
+      },
+      {
+        "title": "台湾政府严厉谴责中国跨境镇压伤害台湾公民，吁民主伙伴共同抵制暴力捍卫人权",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/taiwan-condemns-china-s-transnational-repression-in-hiring-locals-to-stage-accident-in-hurting-comedian-who-criticize-xi-20261021/8213819.html",
+        "fetched_at": "2026-10-23T02:07:38+08:00"
+      },
+      {
+        "title": "波斯湾及霍尔木兹海峡接连发生油轮遇袭，油价持续走高",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/tankers-hit-in-gulf-strait-of-hormuz-as-oil-prices-remain-high-20261021/8213786.html",
+        "fetched_at": "2026-10-23T02:07:38+08:00"
+      },
+      {
+        "title": "日本称中俄战机侵犯日本防空识别区次数激增，日战机频繁紧急起飞饱受困扰",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/japan-reports-surge-in-airspace-violations-by-chinese-russian-aircraft-20261021/8213737.html",
+        "fetched_at": "2026-10-23T02:07:38+08:00"
+      },
+      {
+        "title": "美国官员告诉VOA：俄罗斯与乌克兰同意举行技术层面的三方会谈",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/us-official-to-voa-russia-ukraine-agree-to-hold-technical-level-trilateral-talks-20261021/8213736.html",
+        "fetched_at": "2026-10-23T02:07:38+08:00"
+      },
+      {
+        "title": "俄罗斯释放自2022年起被拘押的美国退休教师",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/russia-releases-retired-american-schoolteacher-detained-since-2022-20261021/8213689.html",
+        "fetched_at": "2026-10-23T02:07:38+08:00"
+      },
+      {
+        "title": "台湾国安局警告选举前夕中国的虚假信息战",
+        "source": "VOA",
+        "url": "https://www.voachinese.com/a/taiwan-security-agency-flags-rise-in-chinese-disinformation-ahead-of-local-elections-20261021/8213624.html",
+        "fetched_at": "2026-10-23T02:07:38+08:00"
+      }
+    ],
+    "attributions": [
+      {
+        "source": "行政院",
+        "license": "政府資料開放授權條款－第1版。使用時應註明出處。",
+        "url": "https://data.gov.tw/license"
+      },
+      {
+        "source": "VOA",
+        "license": "VOA 自製內容屬於公有領域，引用請註明 VOA。已排除 AP、Reuters、AFP 素材。",
+        "url": "https://www.voanews.com/p/5338.html"
+      }
+    ],
+    "filtered_wire_services": 0
+  },
+  "weather": {
+    "source": "中央氣象署",
+    "attribution": "中央氣象署開放資料（氣象資料開放平台）",
+    "by_county": {
+      "CYQ": {
+        "name": "嘉義縣",
+        "t_min_c": 25,
+        "t_max_c": 26,
+        "summary": "多雲時陰",
+        "note": null
+      },
+      "NWT": {
+        "name": "新北市",
+        "t_min_c": 23,
+        "t_max_c": 23,
+        "summary": "陰陣雨",
+        "note": null
+      },
+      "CYI": {
+        "name": "嘉義市",
+        "t_min_c": 24,
+        "t_max_c": 25,
+        "summary": "多雲時陰短暫陣雨",
+        "note": null
+      },
+      "HSQ": {
+        "name": "新竹縣",
+        "t_min_c": 23,
+        "t_max_c": 23,
+        "summary": "陰陣雨",
+        "note": null
+      },
+      "HSZ": {
+        "name": "新竹市",
+        "t_min_c": 23,
+        "t_max_c": 23,
+        "summary": "陰陣雨",
+        "note": null
+      },
+      "TPE": {
+        "name": "臺北市",
+        "t_min_c": 23,
+        "t_max_c": 24,
+        "summary": "陰陣雨",
+        "note": null
+      },
+      "TNN": {
+        "name": "臺南市",
+        "t_min_c": 25,
+        "t_max_c": 26,
+        "summary": "多雲時陰",
+        "note": null
+      },
+      "ILA": {
+        "name": "宜蘭縣",
+        "t_min_c": 22,
+        "t_max_c": 23,
+        "summary": "陰陣雨",
+        "note": null
+      },
+      "MIA": {
+        "name": "苗栗縣",
+        "t_min_c": 21,
+        "t_max_c": 22,
+        "summary": "陰陣雨",
+        "note": null
+      },
+      "YUN": {
+        "name": "雲林縣",
+        "t_min_c": 23,
+        "t_max_c": 24,
+        "summary": "多雲時陰",
+        "note": null
+      },
+      "HUA": {
+        "name": "花蓮縣",
+        "t_min_c": 25,
+        "t_max_c": 27,
+        "summary": "陰短暫陣雨",
+        "note": null
+      },
+      "TXG": {
+        "name": "臺中市",
+        "t_min_c": 25,
+        "t_max_c": 25,
+        "summary": "陰天",
+        "note": null
+      },
+      "TTT": {
+        "name": "臺東縣",
+        "t_min_c": 27,
+        "t_max_c": 28,
+        "summary": "陰短暫陣雨",
+        "note": null
+      },
+      "TAO": {
+        "name": "桃園市",
+        "t_min_c": 23,
+        "t_max_c": 23,
+        "summary": "陰陣雨",
+        "note": null
+      },
+      "NAN": {
+        "name": "南投縣",
+        "t_min_c": 24,
+        "t_max_c": 25,
+        "summary": "陰短暫陣雨",
+        "note": null
+      },
+      "KHH": {
+        "name": "高雄市",
+        "t_min_c": 27,
+        "t_max_c": 28,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "KIN": {
+        "name": "金門縣",
+        "t_min_c": 23,
+        "t_max_c": 23,
+        "summary": "晴時多雲",
+        "note": null
+      },
+      "PIF": {
+        "name": "屏東縣",
+        "t_min_c": 26,
+        "t_max_c": 27,
+        "summary": "多雲",
+        "note": null
+      },
+      "KEE": {
+        "name": "基隆市",
+        "t_min_c": 23,
+        "t_max_c": 24,
+        "summary": "陰陣雨",
+        "note": null
+      },
+      "PEN": {
+        "name": "澎湖縣",
+        "t_min_c": 24,
+        "t_max_c": 25,
+        "summary": "陰天",
+        "note": null
+      },
+      "CHA": {
+        "name": "彰化縣",
+        "t_min_c": 25,
+        "t_max_c": 25,
+        "summary": "陰天",
+        "note": null
+      },
+      "LIE": {
+        "name": "連江縣",
+        "t_min_c": 22,
+        "t_max_c": 23,
+        "summary": "陰天",
+        "note": null
+      }
+    }
+  },
+  "songs": {
+    "source": null,
+    "chart_date": null,
+    "items": [],
+    "status": "unavailable",
+    "note": "尚無允許公開再散布的排行榜來源"
+  },
+  "prices": [],
+  "trends": {
+    "source": "Google Trends",
+    "attribution": "Google Trends。依 Google 服務條款使用；再使用時請註明 Google。https://support.google.com/trends/answer/4365538?hl=en",
+    "items": [
+      {
+        "rank": 1,
+        "term": "板橋火災",
+        "url": "https://trends.google.com/trends/explore?q=%E6%9D%BF%E6%A9%8B%E7%81%AB%E7%81%BD&geo=TW"
+      },
+      {
+        "rank": 2,
+        "term": "歐聯",
+        "url": "https://trends.google.com/trends/explore?q=%E6%AD%90%E8%81%AF&geo=TW"
+      },
+      {
+        "rank": 3,
+        "term": "科林研發",
+        "url": "https://trends.google.com/trends/explore?q=%E7%A7%91%E6%9E%97%E7%A0%94%E7%99%BC&geo=TW"
+      },
+      {
+        "rank": 4,
+        "term": "中華 電信 斷 網",
+        "url": "https://trends.google.com/trends/explore?q=%E4%B8%AD%E8%8F%AF+%E9%9B%BB%E4%BF%A1+%E6%96%B7+%E7%B6%B2&geo=TW"
+      },
+      {
+        "rank": 5,
+        "term": "盛艾敬",
+        "url": "https://trends.google.com/trends/explore?q=%E7%9B%9B%E8%89%BE%E6%95%AC&geo=TW"
+      },
+      {
+        "rank": 6,
+        "term": "bts 演唱會",
+        "url": "https://trends.google.com/trends/explore?q=bts+%E6%BC%94%E5%94%B1%E6%9C%83&geo=TW"
+      },
+      {
+        "rank": 7,
+        "term": "張凌赫 來 台 被 拒",
+        "url": "https://trends.google.com/trends/explore?q=%E5%BC%B5%E5%87%8C%E8%B5%AB+%E4%BE%86+%E5%8F%B0+%E8%A2%AB+%E6%8B%92&geo=TW"
+      },
+      {
+        "rank": 8,
+        "term": "庫藏股",
+        "url": "https://trends.google.com/trends/explore?q=%E5%BA%AB%E8%97%8F%E8%82%A1&geo=TW"
+      },
+      {
+        "rank": 9,
+        "term": "越捷航空",
+        "url": "https://trends.google.com/trends/explore?q=%E8%B6%8A%E6%8D%B7%E8%88%AA%E7%A9%BA&geo=TW"
+      },
+      {
+        "rank": 10,
+        "term": "費半指數",
+        "url": "https://trends.google.com/trends/explore?q=%E8%B2%BB%E5%8D%8A%E6%8C%87%E6%95%B8&geo=TW"
+      }
+    ]
+  },
+  "missing": [
+    "prices",
+    "songs"
+  ],
+  "signature": {
+    "alg": "ed25519",
+    "key_id": "2026-10",
+    "sig": "K66ANBjfX4Es0cWQP9m6FjVfk2pJDZcNKTpQKT5+gWQieiIrq59LqRJZvmz8JSDVs/6ymn4FPhVbLfHOA6R/Dw=="
+  }
+}
