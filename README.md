@@ -13,6 +13,7 @@
 | `pipeline/snapshot` | `canary` / `collect` / `gaps` 進入點 |
 | `fixtures/snapshot`、`fixtures/registry` | 舊資料、新資料與價格品項 fixture |
 | `v1/` | 公開歸檔。日期檔由排程寫入；schema 與 registry 的凍結複本隨 PR 進庫 |
+| `privacy/` | App 的隱私政策頁，商店上架填的政策網址 |
 | `.github/workflows/snapshot.yml` | 每日 21:30（台北）蒐集並發布 |
 | `.github/workflows/ci.yml` | `typecheck`、`test`、`audit`、`license` |
 
