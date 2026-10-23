@@ -1,8 +1,8 @@
 # v1 公開歸檔
 
-`schema_version` 維持 1。已發布的日期檔 `v1/<地區>/<年>/<YYYY-MM-DD>.json` 與 `v1/schema/snapshot-v1.<minor>.json` 只新增、不修改。新欄位只能當選用欄位，並提高 `schema_minor`。
+`schema_version` 維持 1。`v1/schema/snapshot-v1.<minor>.json` 只新增、不修改。日期檔 `v1/<地區>/<年>/<YYYY-MM-DD>.json` 在當天（台北時間）每小時更新一次，內容是當天最後一次抓到的快照；日期一過就不再修改。新欄位只能當選用欄位，並提高 `schema_minor`。
 
-每天的檔案由 GitHub Actions 簽章後提交。GitHub Pages 從 `main` 的根目錄提供這些靜態檔，例如：
+檔案由 GitHub Actions 每小時簽章後提交（內容沒變就不提交）。每次更新都重新簽章，`generated_at` 較新的才會取代舊的。新聞標題只收繁體中文，含簡體字的標題與熱搜詞不收。GitHub Pages 從 `main` 的根目錄提供這些靜態檔，例如：
 
 `https://bh-inf.github.io/time-capsule-snapshots/v1/TW/2026/2026-10-18.json`
 

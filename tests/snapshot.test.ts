@@ -7,6 +7,7 @@ import {
   HttpBytes,
   collectSnapshot,
   findMissingDates,
+  hasSimplifiedChinese,
   isWireService,
   normalizeSnapshot,
   parseCwaForecast,
@@ -29,6 +30,7 @@ const VOA = `<?xml version="1.0"?><rss><channel>
 <item><title>通訊社標題</title><link>https://www.voachinese.com/a/wire</link><author>chinese@voanews.com (Reuters)</author></item>
 <item><title>法新社稿</title><link>https://www.voachinese.com/a/afp</link><author>desk (AFP)</author></item>
 <item><title>美联社稿</title><link>https://www.voachinese.com/a/ap</link><source>AP</source></item>
+<item><title>调查报告：中俄防务合作加速升级</title><link>https://www.voachinese.com/a/simplified</link><author>voa</author></item>
 <item><title>Threads 連結</title><link>https://www.threads.net/post/1</link><author>voa</author></item>
 </channel></rss>`;
 
@@ -141,25 +143,50 @@ describe("collector", () => {
 });
 
 describe("archive writes", () => {
-  it("refuses to replace an archived date or follow a symlink", () => {
+  const base = { schema_version: 1, region: "TW", date: "2026-10-18", missing: [] as string[] };
+  const make = (generatedAt: string, title: string, missing: string[] = []) =>
+    ({ ...base, generated_at: generatedAt, missing, news: { taiwan: [{ title, fetched_at: generatedAt }] }, signature: { value: generatedAt } }) as unknown as Snapshot;
+  const read = (root: string, path: string) => JSON.parse(readFileSync(join(root, path), "utf8"));
+
+  it("replaces the newest day with a later run that changed", () => {
     const root = mkdtempSync(join(tmpdir(), "snapshot-archive-"));
-    const snapshot = {
-      schema_version: 1,
-      region: "TW",
-      date: "2026-10-18",
-    } as Snapshot;
-    const first = writeSnapshotTree({ repoRoot: root, snapshot: { ...snapshot, generated_at: "a" } as Snapshot });
+    const first = writeSnapshotTree({ repoRoot: root, snapshot: make("2026-10-18T09:30:00+08:00", "甲") });
     expect(first.wroteDate).toBe(true);
-    const again = writeSnapshotTree({ repoRoot: root, snapshot: { ...snapshot, generated_at: "b" } as Snapshot });
-    expect(again.wroteDate).toBe(false);
-    expect(readFileSync(join(root, first.datePath), "utf8")).toContain('"generated_at": "a"');
+    const same = writeSnapshotTree({ repoRoot: root, snapshot: make("2026-10-18T10:30:00+08:00", "甲") });
+    expect(same.wroteDate).toBe(false);
+    expect(read(root, first.datePath).generated_at).toBe("2026-10-18T09:30:00+08:00");
+    const changed = writeSnapshotTree({ repoRoot: root, snapshot: make("2026-10-18T11:30:00+08:00", "乙") });
+    expect(changed.wroteDate).toBe(true);
+    expect(read(root, first.datePath).news.taiwan[0].title).toBe("乙");
+  });
+
+  it("keeps the stored copy for an older run, a run that lost a section, or a past day", () => {
+    const root = mkdtempSync(join(tmpdir(), "snapshot-archive-"));
+    const first = writeSnapshotTree({ repoRoot: root, snapshot: make("2026-10-18T09:30:00+08:00", "甲") });
+    expect(writeSnapshotTree({ repoRoot: root, snapshot: make("2026-10-18T08:30:00+08:00", "乙") }).wroteDate).toBe(false);
+    expect(writeSnapshotTree({ repoRoot: root, snapshot: make("2026-10-18T10:30:00+08:00", "乙", ["weather"]) }).wroteDate).toBe(false);
+    const next = { ...make("2026-10-19T09:30:00+08:00", "丙"), date: "2026-10-19" } as Snapshot;
+    expect(writeSnapshotTree({ repoRoot: root, snapshot: next }).wroteDate).toBe(true);
+    expect(writeSnapshotTree({ repoRoot: root, snapshot: make("2026-10-18T23:30:00+08:00", "乙") }).wroteDate).toBe(false);
+    expect(read(root, first.datePath).news.taiwan[0].title).toBe("甲");
+  });
+
+  it("refuses to follow a symlink", () => {
     const linkRoot = mkdtempSync(join(tmpdir(), "snapshot-link-"));
     const real = join(linkRoot, "real.json");
     writeFileSync(real, "{}\n");
     mkdirSync(join(linkRoot, "v1", "TW", "2026"), { recursive: true });
     symlinkSync(real, join(linkRoot, "v1", "TW", "2026", "2026-10-18.json"));
     expect(lstatSync(join(linkRoot, "v1", "TW", "2026", "2026-10-18.json")).isSymbolicLink()).toBe(true);
-    expect(() => writeSnapshotTree({ repoRoot: linkRoot, snapshot })).toThrow(/non-regular/);
+    expect(() => writeSnapshotTree({ repoRoot: linkRoot, snapshot: make("2026-10-18T09:30:00+08:00", "甲") })).toThrow(/non-regular/);
+  });
+});
+
+describe("simplified Chinese", () => {
+  it("is detected by characters that traditional text does not use", () => {
+    expect(hasSimplifiedChinese("调查报告：中俄防务合作")).toBe(true);
+    expect(hasSimplifiedChinese("視導薔琵颱風中央災害應變中心")).toBe(false);
+    expect(hasSimplifiedChinese("台灣 2026 AI 後端")).toBe(false);
   });
 });
 

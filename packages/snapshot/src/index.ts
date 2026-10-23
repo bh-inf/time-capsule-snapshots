@@ -12,6 +12,7 @@ export {
   type OneShot,
 } from "./fetch.ts";
 export { cleanText, decodeXmlEntities, extractElements, parseRssItems } from "./rss.ts";
+export { hasSimplifiedChinese } from "./script.ts";
 export { isWireService } from "./wire.ts";
 export {
   CWA_FORECAST_URL,
@@ -41,5 +42,5 @@ export {
   verifySnapshotSignature,
 } from "./sign.ts";
 export { findMissingDates } from "./gaps.ts";
-export { isDateArchivePath, mergeIndex, readIndex, snapshotRelativePath, writeSnapshotTree } from "./publish.ts";
+export { isDateArchivePath, isReplacement, mergeIndex, readIndex, snapshotRelativePath, writeSnapshotTree } from "./publish.ts";
 export { taipeiParts } from "./time.ts";

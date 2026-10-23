@@ -21,7 +21,7 @@ if git -C "$ROOT" diff --cached --quiet; then
 fi
 
 git -C "$ROOT" -c user.name="snapshot-bot" -c user.email="snapshot-bot@users.noreply.github.com" \
-  commit -m "snapshot: publish daily archive"
+  commit -m "snapshot: update archive"
 
 git -C "$ROOT" fetch origin main
 git -C "$ROOT" rebase origin/main
