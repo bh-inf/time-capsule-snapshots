@@ -14,7 +14,7 @@ export const EY_ATTRIBUTION = {
 
 export const VOA_ATTRIBUTION = {
   source: "VOA",
-  license: "VOA 自製內容屬於公有領域，引用請註明 VOA。已排除 AP、Reuters、AFP 素材。",
+  license: "VOA 自製內容屬於公有領域，引用請註明 VOA。已排除 AP、Reuters、AFP 素材。標題由簡體轉成繁體。",
   url: VOA_TERMS_URL,
 } as const;
 
