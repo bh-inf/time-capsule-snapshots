@@ -16,7 +16,7 @@ a { color: var(--accent); overflow-wrap: anywhere; }
 </head>
 <body>
 <h1>家庭時光膠囊隱私政策</h1>
-<p class="date">生效日期：2026-10-22</p>
+<p class="date">生效日期：2026-10-23</p>
 <section id="summary">
 <h2>簡單說</h2>
 <p>我們沒有伺服器存放你的資料，也沒有帳號系統。你放進膠囊的東西只存在你的手機，以及你自己的 iCloud 或 Google 雲端硬碟，我們讀不到。</p>
@@ -30,7 +30,7 @@ a { color: var(--accent); overflow-wrap: anywhere; }
 <h2>你的內容存在哪裡</h2>
 <p>你放進膠囊的內容包括：照片、日記、聲音、氣味描述、家人的名字、角色與生日、你替手機取的名字、每則內容是誰提供的、孩子的名字與生日、膠囊所在的縣市、預言、選的歌、復原金鑰的公開資訊和守護卡的指紋。這些都存在手機上 App 自己的資料夾。</p>
 <p>照片檔通常帶著手機或相機寫進去的資訊，例如拍攝時間，也可能有拍攝地點。App 讀拍攝時間，把照片放到拍攝的那一天；這些資訊可能跟著照片一起存進膠囊和你的雲端。</p>
-<p>iPhone 備份到你 iCloud 帳號裡這個 App 的私人資料庫；Android 備份到你 Google 雲端硬碟裡只有這個 App 能讀的隱藏區域。這兩個地方由 Apple 與 Google 依你和它們的約定保管，我們沒有權限讀取。App 的資料夾不進手機的系統備份（iCloud 備份、Google 備份），只走上面這條路。</p>
+<p>iPhone 備份到你 iCloud 帳號裡這個 App 的私人資料庫；不能用 iCloud 時（例如手機沒有登入 iCloud），可以改用你 Google 雲端硬碟裡只有這個 App 能讀的隱藏區域。Android 備份到 Google 雲端硬碟的這個區域。這兩個地方由 Apple 與 Google 依你和它們的約定保管，我們沒有權限讀取。App 的資料夾不進手機的系統備份（iCloud 備份、Google 備份），只走上面這條路。</p>
 <p>還原或換手機時，App 從你自己的雲端把資料下載回來。</p>
 </section>
 <section id="collect">
@@ -40,7 +40,7 @@ a { color: var(--accent); overflow-wrap: anywhere; }
 </section>
 <section id="network">
 <h2>App 會連到哪裡</h2>
-<p>你的雲端：備份與還原時連到 Apple iCloud 或 Google 雲端硬碟，用的是你在手機上登入的帳號。</p>
+<p>你的雲端：備份與還原時連到 Apple iCloud 或 Google 雲端硬碟。iCloud 用的是你在 iPhone 上登入的 Apple 帳號；Google 雲端硬碟用的是你在 Google 登入畫面同意的帳號，在 iPhone 上這個畫面是系統打開的 Google 網頁。</p>
 <p>世界快照：每天從公開網站下載當天的快照檔。這些下載不帶任何帳號、裝置識別碼或膠囊內容，所有使用者拿到的是同一份檔案。快照網站放在 GitHub Pages，GitHub 會像一般網站一樣留下連線紀錄（例如 IP 位址），這些紀錄不由我們經營，我們也不會去取得。</p>
 <p>歌曲連結：你貼上或分享 Apple Music、Spotify 的歌曲連結時，App 會把連結裡的歌曲編號送到 Apple 或 Spotify 的公開查詢服務，拿回歌名和歌手。這次查詢不帶你的名字或膠囊內容，但對方會像一般網站一樣看到你的 IP 位址。KKBOX 的連結不會查詢，只讀分享文字。</p>
 <p>你點歌曲卡上的連結或其他外部連結時，會在瀏覽器或對應的 App 打開那個網站，之後適用那個網站自己的政策。</p>
@@ -56,8 +56,9 @@ a { color: var(--accent); overflow-wrap: anywhere; }
 </section>
 <section id="google">
 <h2>Google 使用者資料</h2>
-<p>Android 版只要求 Google 雲端硬碟「應用程式資料」的權限，讀不到你雲端硬碟裡的其他檔案。從 Google 取得的資料只用來替你備份和還原膠囊，不傳給我們或任何其他人，不用於廣告，也不會被人工讀取。App 使用 Google API 取得的資料，遵守 Google API Services User Data Policy，包括其中的 Limited Use（有限使用）規定。</p>
-<p>你可以隨時在 Google 帳戶的「第三方應用程式和服務」移除這個 App 的存取權，之後 Android 備份會暫停，手機上的資料仍在。</p>
+<p>用 Google 雲端硬碟備份時（Android，或改用 Google 雲端硬碟的 iPhone），App 只要求 Google 雲端硬碟「應用程式資料」的權限，讀不到你雲端硬碟裡的其他檔案。從 Google 取得的資料只用來替你備份和還原膠囊，不傳給我們或任何其他人，不用於廣告，也不會被人工讀取。App 使用 Google API 取得的資料，遵守 Google API Services User Data Policy，包括其中的 Limited Use（有限使用）規定。</p>
+<p>在 iPhone 上，Google 給的登入憑證存在這支手機的鑰匙圈，只用來在背景繼續備份，不會傳到我們這裡，也不會跟著手機備份到別的裝置。Android 的登入由手機上的 Google Play 服務處理。</p>
+<p>你可以隨時在 Google 帳戶的「第三方應用程式和服務」移除這個 App 的存取權，之後用這個 Google 帳號的備份會暫停，手機上的資料仍在。</p>
 </section>
 <section id="export">
 <h2>匯出的網站</h2>
@@ -84,7 +85,7 @@ a { color: var(--accent); overflow-wrap: anywhere; }
 <p>資料會一直保存在你的手機和雲端，直到你自己刪除。我們手上沒有你的資料，所以沒有需要我們保存或替你刪除的東西。</p>
 <p>在 App 裡刪除照片、一句話或聲音，它會先放到「最近刪除」，30 天內可以復原。這一版的刪除只是把內容藏起來，檔案和文字仍留在膠囊和你的雲端備份裡。</p>
 <p>永久刪除會讓 App 不再顯示那張照片或那段聲音，這則紀錄的文字會留著。照片或聲音檔會在大約一週後，從這支手機和你的雲端備份真正刪掉；家裡其他也裝了這個 App 的手機，會在收到後大約一週各自刪掉。另一支手機一次永久刪除很多張時，App 會先問你要不要繼續。換手機或還原之後，少數之前永久刪除的檔案可能還有副本留著，App 會提醒你，你可以在那張卡片上按「再刪一次」清掉。</p>
-<p>刪除 App 會刪掉手機上的資料。雲端的備份要另外刪：iPhone 在「設定 &gt; 你的名字 &gt; iCloud &gt; 管理帳號儲存空間」找到這個 App 刪除資料；Android 在電腦版 Google 雲端硬碟的「設定 &gt; 管理應用程式」，在這個 App 的「選項」選「刪除隱藏的應用程式資料」。</p>
+<p>刪除 App 會刪掉手機上的資料。雲端的備份要另外刪：備份在 iCloud 的，在 iPhone「設定 &gt; 你的名字 &gt; iCloud &gt; 管理帳號儲存空間」找到這個 App 刪除資料；備份在 Google 雲端硬碟的（Android，或改用 Google 雲端硬碟的 iPhone），在電腦版 Google 雲端硬碟的「設定 &gt; 管理應用程式」，在這個 App 的「選項」選「刪除隱藏的應用程式資料」。iPhone 刪除 App 後，鑰匙圈裡的 Google 登入憑證可能還留在手機上，要一起取消就到 Google 帳戶移除這個 App 的存取權。</p>
 <p>已經匯出的網站、存到電腦或隨身碟的檔案，以及分享給別人的副本，都在 App 以外，要到那些地方各自刪除。</p>
 </section>
 <section id="rights">
