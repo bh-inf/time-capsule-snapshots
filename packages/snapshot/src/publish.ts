@@ -72,19 +72,21 @@ export function writeSnapshotTree(options: {
   const body = `${JSON.stringify(options.snapshot, null, 2)}\n`;
   let wroteDate = false;
   mkdirSync(dirname(datePath), { recursive: true });
-  if (exists(sourceDate)) {
-    assertRegular(sourceDate);
-    if (outputRoot !== options.repoRoot && !exists(datePath)) {
-      writeFileSync(datePath, readFileSync(sourceDate), { flag: "wx" });
-    }
-  } else if (exists(datePath)) {
-    assertRegular(datePath);
-    if (readFileSync(datePath, "utf8") !== body) {
-      throw new Error(`refusing to modify archived date file ${relative}`);
-    }
-  } else {
+  const currentPath = exists(sourceDate) ? sourceDate : exists(datePath) ? datePath : null;
+  if (currentPath) assertRegular(currentPath);
+  if (exists(datePath)) assertRegular(datePath);
+  if (!currentPath) {
     writeFileSync(datePath, body, { flag: "wx" });
     wroteDate = true;
+  } else {
+    const current: unknown = JSON.parse(readFileSync(currentPath, "utf8"));
+    const latest = readIndex(options.repoRoot, options.snapshot.region).latest;
+    if (isReplacement(current, options.snapshot, latest)) {
+      writeFileSync(datePath, body);
+      wroteDate = true;
+    } else if (currentPath === sourceDate && outputRoot !== options.repoRoot && !exists(datePath)) {
+      writeFileSync(datePath, readFileSync(sourceDate), { flag: "wx" });
+    }
   }
   const index = mergeIndex(readIndex(options.repoRoot, options.snapshot.region), options.snapshot.date);
   const indexPath = join(outputRoot, "v1", options.snapshot.region, "index.json");
@@ -92,6 +94,32 @@ export function writeSnapshotTree(options: {
   if (exists(indexPath)) assertRegular(indexPath);
   writeFileSync(indexPath, `${JSON.stringify(index, null, 2)}\n`);
   return { datePath: relative, wroteDate, indexPath: join("v1", options.snapshot.region, "index.json") };
+}
+
+function stripVolatile(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(stripVolatile);
+  if (typeof value !== "object" || value === null) return value;
+  const out: Record<string, unknown> = {};
+  for (const [key, child] of Object.entries(value)) {
+    if (key === "generated_at" || key === "fetched_at" || key === "signature") continue;
+    out[key] = stripVolatile(child);
+  }
+  return out;
+}
+
+/**
+ * Only the newest day may be replaced, by a later run of that same day that changed the content and
+ * did not lose a section the stored copy had.
+ */
+export function isReplacement(current: unknown, next: Snapshot, latest: string | null): boolean {
+  if (typeof current !== "object" || current === null) return false;
+  const old = current as Record<string, unknown>;
+  if (old["date"] !== next.date || latest !== next.date) return false;
+  if (typeof old["generated_at"] !== "string" || typeof next.generated_at !== "string") return false;
+  if (next.generated_at <= old["generated_at"]) return false;
+  const oldMissing = new Set(Array.isArray(old["missing"]) ? old["missing"] : []);
+  if ((next.missing ?? []).some((section) => !oldMissing.has(section))) return false;
+  return JSON.stringify(stripVolatile(current)) !== JSON.stringify(stripVolatile(next));
 }
 
 function exists(path: string): boolean {

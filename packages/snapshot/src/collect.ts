@@ -2,6 +2,7 @@ import { SCHEMA_URL } from "@time-capsule/schema";
 import { HttpBytes, safeFetch, scrubSecrets, type OneShot } from "./fetch.ts";
 import { cleanText, parseRssItems } from "./rss.ts";
 import { taipeiParts } from "./time.ts";
+import { hasSimplifiedChinese } from "./script.ts";
 import { isWireService } from "./wire.ts";
 import { assertPublicHttpsUrl } from "./url-policy.ts";
 import {
@@ -130,7 +131,7 @@ function headlinesFromTitles(titles: string[], source: string, url: string, fetc
   const items: Headline[] = [];
   for (const title of titles) {
     const cleaned = [...cleanText(title)].slice(0, 180).join("");
-    if (!cleaned || seen.has(cleaned)) continue;
+    if (!cleaned || seen.has(cleaned) || hasSimplifiedChinese(cleaned)) continue;
     seen.add(cleaned);
     const stored = storeableHttps(url);
     if (!stored) continue;
@@ -178,11 +179,12 @@ async function collectWorld(options: CollectOptions, fetchedAt: string): Promise
     }
     const title = [...cleanText(item.title)].slice(0, 180).join("");
     const url = storeableHttps(item.link);
-    if (!title || !url || seen.has(title)) continue;
+    if (!title || !url || seen.has(title) || hasSimplifiedChinese(title)) continue;
     seen.add(title);
     kept.push({ title, source: "VOA", url, fetched_at: fetchedAt });
     if (kept.length >= HEADLINE_LIMIT) break;
   }
+  if (kept.length === 0) return { ok: false };
   return { ok: true, value: { items: kept, filtered } };
 }
 
@@ -271,7 +273,7 @@ async function collectTrends(
   const trends = items
     .map((item, index) => {
       const term = [...cleanText(item.title)].slice(0, 200).join("");
-      if (!term) return null;
+      if (!term || hasSimplifiedChinese(term)) return null;
       return { rank: index + 1, term, url: trendsExploreUrl(term, region.trendsGeo) };
     })
     .filter((item): item is Snapshot["trends"]["items"][number] => item !== null);

@@ -41,6 +41,34 @@ def exclusive_write(path: str, body: bytes) -> None:
         handle.write(body)
 
 
+def replace_file(path: str, body: bytes) -> None:
+    temp = path + ".tmp"
+    if os.path.lexists(temp):
+        if os.path.islink(temp):
+            fail(f"refusing symlink {temp}")
+        os.remove(temp)
+    exclusive_write(temp, body)
+    os.replace(temp, path)
+
+
+def check_replacement(rel: str, dest_root: str, current: dict, incoming: dict) -> None:
+    """Only the newest day is replaceable, by a later run of that day that lost no section."""
+    date = os.path.basename(rel)[: -len(".json")]
+    if current.get("date") != date or incoming.get("date") != date:
+        fail(f"refusing to modify archived date file {rel}")
+    index_path = os.path.join(dest_root, os.path.dirname(os.path.dirname(rel)), "index.json")
+    latest = None
+    if os.path.lexists(index_path):
+        latest = (json.loads(read(index_path)).get("dates") or [None])[-1]
+    if latest != date:
+        fail(f"refusing to modify archived date file {rel}")
+    before, after = current.get("generated_at"), incoming.get("generated_at")
+    if not isinstance(before, str) or not isinstance(after, str) or after <= before:
+        fail(f"refusing to replace {rel} with an older run")
+    if set(incoming.get("missing") or []) - set(current.get("missing") or []):
+        fail(f"refusing to replace {rel} with a run that lost a section")
+
+
 def merge_index(existing: dict, incoming: dict) -> dict:
     region = incoming.get("region") or existing.get("region")
     dates = sorted(set(existing.get("dates") or []) | set(incoming.get("dates") or []))
@@ -78,8 +106,10 @@ def main() -> None:
                 fail(f"invalid json {rel}: {error}")
             if os.path.lexists(dest):
                 current = read(dest)
-                if current != body:
-                    fail(f"refusing to modify archived date file {rel}")
+                if current == body:
+                    continue
+                check_replacement(rel, dest_root, json.loads(current), json.loads(text))
+                replace_file(dest, body)
                 continue
             exclusive_write(dest, body)
             continue
