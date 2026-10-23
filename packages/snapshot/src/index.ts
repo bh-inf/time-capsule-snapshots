@@ -12,7 +12,7 @@ export {
   type OneShot,
 } from "./fetch.ts";
 export { cleanText, decodeXmlEntities, extractElements, parseRssItems } from "./rss.ts";
-export { hasSimplifiedChinese } from "./script.ts";
+export { hasSimplifiedChinese, toTraditionalChinese } from "./script.ts";
 export { isWireService } from "./wire.ts";
 export {
   CWA_FORECAST_URL,

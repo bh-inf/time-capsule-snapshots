@@ -2,7 +2,7 @@ import { SCHEMA_URL } from "@time-capsule/schema";
 import { HttpBytes, safeFetch, scrubSecrets, type OneShot } from "./fetch.ts";
 import { cleanText, parseRssItems } from "./rss.ts";
 import { taipeiParts } from "./time.ts";
-import { hasSimplifiedChinese } from "./script.ts";
+import { hasSimplifiedChinese, toTraditionalChinese } from "./script.ts";
 import { isWireService } from "./wire.ts";
 import { assertPublicHttpsUrl } from "./url-policy.ts";
 import {
@@ -177,7 +177,7 @@ async function collectWorld(options: CollectOptions, fetchedAt: string): Promise
       filtered += 1;
       continue;
     }
-    const title = [...cleanText(item.title)].slice(0, 180).join("");
+    const title = [...toTraditionalChinese(cleanText(item.title))].slice(0, 180).join("");
     const url = storeableHttps(item.link);
     if (!title || !url || seen.has(title) || hasSimplifiedChinese(title)) continue;
     seen.add(title);

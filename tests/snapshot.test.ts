@@ -8,6 +8,7 @@ import {
   collectSnapshot,
   findMissingDates,
   hasSimplifiedChinese,
+  toTraditionalChinese,
   isWireService,
   normalizeSnapshot,
   parseCwaForecast,
@@ -93,7 +94,7 @@ describe("collector", () => {
     });
     expect(snapshot.news.taiwan.map((item) => item.title)).toEqual(["測試標題一", "測試標題二"]);
     expect(JSON.stringify(snapshot)).not.toContain("秘密內文不要出現");
-    expect(snapshot.news.world.map((item) => item.title)).toEqual(["VOA 自製標題"]);
+    expect(snapshot.news.world.map((item) => item.title)).toEqual(["VOA 自製標題", "調查報告：中俄防務合作加速升級"]);
     expect(snapshot.news.filtered_wire_services).toBe(3);
     expect(snapshot.news.attributions.map((item) => item.source)).toEqual(["行政院", "VOA"]);
     expect(snapshot.news.attributions[0]?.license).toContain("政府資料開放授權條款－第1版");
@@ -187,6 +188,8 @@ describe("simplified Chinese", () => {
     expect(hasSimplifiedChinese("调查报告：中俄防务合作")).toBe(true);
     expect(hasSimplifiedChinese("視導薔琵颱風中央災害應變中心")).toBe(false);
     expect(hasSimplifiedChinese("台灣 2026 AI 後端")).toBe(false);
+    expect(toTraditionalChinese("调查报告：中俄防务合作加速升级")).toBe("調查報告：中俄防務合作加速升級");
+    expect(hasSimplifiedChinese(toTraditionalChinese("台湾政府严厉谴责中国跨境镇压伤害台湾公民"))).toBe(false);
   });
 });
 
