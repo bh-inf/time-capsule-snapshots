@@ -37,7 +37,15 @@ export type Snapshot = {
     attribution?: string;
     by_county: Record<
       string,
-      { name: string; t_min_c: number; t_max_c: number; summary: string; note: string | null }
+      {
+        name: string;
+        t_min_c: number;
+        t_max_c: number;
+        summary: string;
+        note: string | null;
+        t_now_c?: number;
+        observed_at?: string;
+      }
     >;
   };
   songs: {
@@ -146,6 +154,8 @@ export function normalizeSnapshot(input: unknown): Snapshot {
       t_max_c: Number(county.t_max_c),
       summary: String(county.summary ?? ""),
       note: county.note === null || county.note === undefined ? null : String(county.note),
+      ...(typeof county.t_now_c === "number" && Number.isFinite(county.t_now_c) ? { t_now_c: county.t_now_c } : {}),
+      ...(typeof county.observed_at === "string" ? { observed_at: county.observed_at } : {}),
     };
   }
   const attributions = Array.isArray(news.attributions)

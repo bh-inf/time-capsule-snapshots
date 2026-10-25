@@ -12,6 +12,7 @@ import {
   isWireService,
   normalizeSnapshot,
   parseCwaForecast,
+  parseCwaObservation,
   parseExecutiveYuanTitles,
   trendsExploreUrl,
   writeSnapshotTree,
@@ -63,6 +64,31 @@ const CWA = JSON.stringify({
   },
 });
 
+function station(county: string, temp: unknown, weather: unknown, time = "2026-10-16T21:00:00+08:00", altitude: unknown = "12.0") {
+  return {
+    StationName: "測站",
+    GeoInfo: { CountyName: county, StationAltitude: altitude },
+    ObsTime: { DateTime: time },
+    WeatherElement: { AirTemperature: temp, Weather: weather },
+  };
+}
+
+const CWA_OBS = JSON.stringify({
+  records: {
+    Station: [
+      station("臺北市", "24.0", "陰"),
+      station("臺北市", 25.4, "陰", "2026-10-16T21:10:00+08:00"),
+      station("臺北市", "-99", "-99"),
+      station("臺北市", "X", "X"),
+      station("臺北市", "11.0", "晴", "2026-10-16T21:10:00+08:00", "3952.0"),
+      station("臺北市", "26.0", "多雲"),
+      station("高雄市", "29.5", "晴"),
+      station("花蓮縣", "22.0", "雨"),
+      station("不存在市", "30.0", "晴"),
+    ],
+  },
+});
+
 function feeds(overrides?: Record<string, number>): { calls: string[]; headers: Record<string, string>[]; oneShot: (url: string, init: { headers: Record<string, string> }) => Promise<HttpBytes> } {
   const calls: string[] = [];
   const headers: Record<string, string>[] = [];
@@ -77,6 +103,7 @@ function feeds(overrides?: Record<string, number>): { calls: string[]; headers: 
       if (url.includes("NewOpenData/JSON/154")) body = EY;
       else if (url.includes("voachinese.com")) body = VOA;
       else if (url.includes("/trending/rss")) body = TRENDS;
+      else if (url.includes("O-A0003-001")) body = overrides?.["observation-missing"] ? "{}" : CWA_OBS;
       else if (url.includes("opendata.cwa.gov.tw")) body = CWA;
       else throw new Error(`unexpected fetch ${url}`);
       return new HttpBytes(status, { get: () => null }, Buffer.from(body));
@@ -107,12 +134,16 @@ describe("collector", () => {
     ]);
     expect(snapshot.trends.attribution).toContain("Google");
     expect(JSON.stringify(snapshot.trends)).not.toContain("不該保存的新聞");
-    expect(snapshot.weather.by_county.TPE).toMatchObject({ t_min_c: 21, t_max_c: 27, summary: "多雲" });
+    expect(snapshot.weather.by_county.TPE).toMatchObject({ t_min_c: 21, t_max_c: 27, summary: "陰", t_now_c: 25.4 });
     expect(snapshot.weather.by_county.KHH?.name).toBe("高雄市");
     expect(snapshot.songs.status).toBe("unavailable");
     expect(snapshot.missing).toEqual(expect.arrayContaining(["prices", "songs"]));
     expect(snapshot.schema_version).toBe(1);
-    expect(snapshot.schema_minor).toBe(1);
+    expect(snapshot.schema_minor).toBe(2);
+    expect(snapshot.weather.by_county.TPE).toMatchObject({ t_now_c: 25.4, summary: "陰", observed_at: "2026-10-16T21:10:00+08:00" });
+    expect(snapshot.weather.by_county.KHH).toMatchObject({ t_now_c: 29.5, summary: "晴", t_min_c: 24, t_max_c: 31 });
+    expect(network.calls.some((url) => url.includes("O-A0003-001"))).toBe(true);
+    expect(network.calls.some((url) => url.includes("cwa-test-key"))).toBe(false);
     expect(network.calls.some((url) => url.includes("/trends/explore") || url.includes("/explore?"))).toBe(false);
     expect(network.calls.some((url) => url.includes("threads"))).toBe(false);
     const cwa = network.headers.find((header) => header.authorization === "cwa-test-key");
@@ -131,6 +162,29 @@ describe("collector", () => {
     await expect(collectSnapshot({ now: NOW, cwaApiKey: "cwa-test-key", oneShot: network.oneShot })).rejects.toThrow(/all network sources/);
   });
 
+  it("keeps the forecast when the observation cannot be read, and says so", async () => {
+    const warnings: string[] = [];
+    const snapshot = await collectSnapshot({
+      now: NOW,
+      cwaApiKey: "cwa-test-key",
+      oneShot: feeds({ "observation-missing": 1 }).oneShot,
+      onWarning: (message) => warnings.push(message),
+    });
+    expect(snapshot.weather.by_county.TPE).toMatchObject({ t_min_c: 21, t_max_c: 27, summary: "多雲" });
+    expect(snapshot.weather.by_county.TPE).not.toHaveProperty("t_now_c");
+    expect(warnings.some((message) => message.startsWith("weather observation failed"))).toBe(true);
+    assertWriterSnapshot(snapshot);
+  });
+
+  it("reads the current temperature and weather word per county from the observation report", () => {
+    const observed = parseCwaObservation(CWA_OBS);
+    expect(observed["TPE"]).toEqual({ t_now_c: 25.4, summary: "陰", observed_at: "2026-10-16T21:10:00+08:00" });
+    expect(observed["KHH"]).toEqual({ t_now_c: 29.5, summary: "晴", observed_at: "2026-10-16T21:00:00+08:00" });
+    expect(observed["HUA"]?.t_now_c).toBe(22);
+    expect(Object.keys(observed).sort()).toEqual(["HUA", "KHH", "TPE"]);
+    expect(() => parseCwaObservation("{}")).toThrow(/stations/);
+  });
+
   it("requires the weather key when the schedule requires a signature", async () => {
     await expect(collectSnapshot({ now: NOW, requireConfiguredSources: true, oneShot: feeds().oneShot })).rejects.toThrow(/CWA_API_KEY/);
   });
@@ -140,6 +194,23 @@ describe("collector", () => {
     expect(isWireService("AP")).toBe(true);
     expect(parseExecutiveYuanTitles(EY)).toEqual(["測試標題一", "測試標題一", "測試標題二"]);
     expect(parseCwaForecast(CWA, NOW).TPE?.summary).toBe("多雲");
+  });
+
+  it("accepts a county without a current reading, and a reader of the minor-1 schema accepts one with it", () => {
+    const base = JSON.parse(readFileSync("fixtures/snapshot/v1/schema-minor-1.json", "utf8"));
+    Object.assign(base, {
+      schema: "https://bh-inf.github.io/time-capsule-snapshots/v1/schema/snapshot-v1.2.json",
+      schema_minor: 2,
+    });
+    base.weather.by_county = { TPE: { name: "臺北市", t_min_c: 21, t_max_c: 27, summary: "陰", note: null } };
+    expect(writerAccepts(base)).toBe(true);
+    const withNow = structuredClone(base);
+    Object.assign(withNow.weather.by_county.TPE, { t_now_c: 25.4, observed_at: "2026-10-16T21:10:00+08:00" });
+    expect(writerAccepts(withNow)).toBe(true);
+    expect(readerV10Accepts(withNow)).toBe(true);
+    Object.assign(withNow.weather.by_county.TPE, { observed_at: "yesterday" });
+    expect(writerAccepts(withNow)).toBe(false);
+    expect(normalizeSnapshot(withNow).weather.by_county["TPE"]?.t_now_c).toBe(25.4);
   });
 });
 

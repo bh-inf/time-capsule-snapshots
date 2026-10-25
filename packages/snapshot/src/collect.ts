@@ -9,6 +9,7 @@ import {
   COUNTY_CODES,
   CWA_ATTRIBUTION,
   CWA_FORECAST_URL,
+  CWA_OBSERVATION_URL,
   EY_ATTRIBUTION,
   EY_NEWS_URL,
   TRENDS_ATTRIBUTION,
@@ -226,6 +227,85 @@ export function parseCwaForecast(body: string, now: Date): Snapshot["weather"]["
   return byCounty;
 }
 
+const OBSERVATION_MAX_ALTITUDE_M = 500;
+const OBSERVATION_TIME = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})$/;
+
+type CwaStation = {
+  GeoInfo?: { CountyName?: unknown; StationAltitude?: unknown };
+  ObsTime?: { DateTime?: unknown };
+  WeatherElement?: { AirTemperature?: unknown; Weather?: unknown };
+};
+
+export type CwaObservation = { t_now_c: number; summary: string | null; observed_at: string | null };
+
+function observedNumber(value: unknown): number | null {
+  const number = typeof value === "number" ? value : typeof value === "string" ? Number(value.trim()) : Number.NaN;
+  return Number.isFinite(number) && number > -60 && number < 60 ? number : null;
+}
+
+function observedWeather(value: unknown): string | null {
+  if (typeof value !== "string") return null;
+  const text = value.trim();
+  return text === "" || text === "-99" || text.toUpperCase() === "X" ? null : text;
+}
+
+/**
+ * The current reading of each 縣市 from 現在天氣觀測報告 (O-A0003-001): the median air temperature of its stations at or
+ * below 500 m, the most common weather word among them, and the latest observation time. -99 and X are missing values.
+ */
+export function parseCwaObservation(body: string): Record<string, CwaObservation> {
+  const parsed = JSON.parse(body) as { records?: { Station?: unknown } };
+  const stations = parsed.records?.Station;
+  if (!Array.isArray(stations)) throw new Error("missing stations");
+  const grouped = new Map<string, { temps: number[]; words: Map<string, number>; times: string[] }>();
+  for (const raw of stations as CwaStation[]) {
+    const countyName = raw?.GeoInfo?.CountyName;
+    const code = typeof countyName === "string" ? COUNTY_CODES[countyName] : undefined;
+    if (!code) continue;
+    const altitude = Number(String(raw.GeoInfo?.StationAltitude ?? "").trim());
+    if (Number.isFinite(altitude) && altitude > OBSERVATION_MAX_ALTITUDE_M) continue;
+    const temp = observedNumber(raw.WeatherElement?.AirTemperature);
+    if (temp === null) continue;
+    const group = grouped.get(code) ?? { temps: [], words: new Map<string, number>(), times: [] };
+    group.temps.push(temp);
+    const word = observedWeather(raw.WeatherElement?.Weather);
+    if (word) group.words.set(word, (group.words.get(word) ?? 0) + 1);
+    const time = raw.ObsTime?.DateTime;
+    if (typeof time === "string" && OBSERVATION_TIME.test(time)) group.times.push(time);
+    grouped.set(code, group);
+  }
+  const out: Record<string, CwaObservation> = {};
+  for (const [code, group] of grouped) {
+    const temps = [...group.temps].sort((a, b) => a - b);
+    const middle = Math.floor(temps.length / 2);
+    const median = temps.length % 2 === 1 ? temps[middle]! : (temps[middle - 1]! + temps[middle]!) / 2;
+    const words = [...group.words.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1));
+    const times = [...group.times].sort((a, b) => Date.parse(b) - Date.parse(a));
+    out[code] = { t_now_c: Math.round(median * 10) / 10, summary: words[0]?.[0] ?? null, observed_at: times[0] ?? null };
+  }
+  return out;
+}
+
+async function collectObservation(
+  options: CollectOptions,
+  apiKey: string,
+): Promise<Record<string, CwaObservation> | null> {
+  try {
+    const response = await fetchText(CWA_OBSERVATION_URL, options, {
+      headers: { authorization: apiKey, accept: "application/json" },
+      secrets: [apiKey],
+      maxBytes: 8_000_000,
+    });
+    if (response.status < 200 || response.status >= 300) return null;
+    const observed = parseCwaObservation(response.text());
+    return Object.keys(observed).length === 0 ? null : observed;
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "";
+    options.onWarning?.(`weather observation failed: ${scrubSecrets(message, [apiKey])}`);
+    return null;
+  }
+}
+
 async function collectWeather(
   options: CollectOptions,
   now: Date,
@@ -250,6 +330,19 @@ async function collectWeather(
   try {
     const counties = parseCwaForecast(response.text(), now);
     if (Object.keys(counties).length === 0) throw new Error("no counties");
+    const observed = await collectObservation(options, apiKey);
+    if (observed) {
+      for (const [code, reading] of Object.entries(observed)) {
+        const county = counties[code];
+        if (!county) continue;
+        counties[code] = {
+          ...county,
+          summary: reading.summary ?? county.summary,
+          t_now_c: reading.t_now_c,
+          ...(reading.observed_at ? { observed_at: reading.observed_at } : {}),
+        };
+      }
+    }
     return { ok: true, value: counties };
   } catch (error) {
     throw new SnapshotError(`canary parse failed for weather: ${error instanceof Error ? error.message : "parse"}`);
@@ -310,7 +403,7 @@ export async function collectSnapshot(options: CollectOptions = {}): Promise<Sna
   return {
     schema: SCHEMA_URL,
     schema_version: 1,
-    schema_minor: 1,
+    schema_minor: 2,
     region: region.code,
     date,
     generated_at: generatedAt,
