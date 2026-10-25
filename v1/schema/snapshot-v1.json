@@ -1,8 +1,9 @@
 {
   "schema_version": 1,
-  "latest": "snapshot-v1.1.json",
+  "latest": "snapshot-v1.2.json",
   "files": {
     "0": "snapshot-v1.0.json",
-    "1": "snapshot-v1.1.json"
+    "1": "snapshot-v1.1.json",
+    "2": "snapshot-v1.2.json"
   }
 }

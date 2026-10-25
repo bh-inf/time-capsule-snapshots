@@ -4,6 +4,8 @@ export const VOA_NEWS_URL = "https://www.voachinese.com/api/zm_yql-vomx-tpeybti"
 export const VOA_TERMS_URL = "https://www.voanews.com/p/5338.html";
 export const CWA_FORECAST_URL =
   "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?format=JSON";
+export const CWA_OBSERVATION_URL =
+  "https://opendata.cwa.gov.tw/api/v1/rest/datastore/O-A0003-001?format=JSON";
 export const TRENDS_TERMS_URL = "https://support.google.com/trends/answer/4365538?hl=en";
 
 export const EY_ATTRIBUTION = {
