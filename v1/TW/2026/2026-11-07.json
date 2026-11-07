@@ -4,50 +4,50 @@
   "schema_minor": 2,
   "region": "TW",
   "date": "2026-11-07",
-  "generated_at": "2026-11-07T15:27:29+08:00",
+  "generated_at": "2026-11-07T22:16:47+08:00",
   "news": {
     "taiwan": [
+      {
+        "title": "臺中榮總醫學科技大樓動土 卓揆：深化智慧醫療、提升服務品質 實現健康台灣願景",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-11-07T22:16:47+08:00"
+      },
+      {
+        "title": "台76線延伸工程全線通車 卓揆：完善彰化東西向路網 帶動產業發展與地方繁榮",
+        "source": "行政院",
+        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
+        "fetched_at": "2026-11-07T22:16:47+08:00"
+      },
       {
         "title": "主持治安會報 卓揆：加強查賄制暴、嚴防境外勢力介選 確保選舉公平、公正、安全",
         "source": "行政院",
         "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
-        "fetched_at": "2026-11-07T15:27:29+08:00"
+        "fetched_at": "2026-11-07T22:16:47+08:00"
       },
       {
         "title": "點明《老人福利法》修法三大問題 卓揆請衛福部通盤研商 回歸量能負擔、弱勢補助及永續財政原則",
         "source": "行政院",
         "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
-        "fetched_at": "2026-11-07T15:27:29+08:00"
+        "fetched_at": "2026-11-07T22:16:47+08:00"
       },
       {
         "title": "保存臺灣鐵道歷史、技術與文化 政院通過「國家鐵道博物館設置條例」草案",
         "source": "行政院",
         "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
-        "fetched_at": "2026-11-07T15:27:29+08:00"
+        "fetched_at": "2026-11-07T22:16:47+08:00"
       },
       {
         "title": "卓揆肯定海巡署執行「國安、治安、平安」三安任務 守護國家主權與安全",
         "source": "行政院",
         "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
-        "fetched_at": "2026-11-07T15:27:29+08:00"
+        "fetched_at": "2026-11-07T22:16:47+08:00"
       },
       {
         "title": "政院投入逾33億推動「觀光雙輪驅動方案」展成效 卓揆拍板方案擴大加碼並延長至年底",
         "source": "行政院",
         "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
-        "fetched_at": "2026-11-07T15:27:29+08:00"
-      },
-      {
-        "title": "季連成政委召開「打黑反毒指揮小組」會議 持續整合資源、力量 跨部會精進反毒工作",
-        "source": "行政院",
-        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
-        "fetched_at": "2026-11-07T15:27:29+08:00"
-      },
-      {
-        "title": "蘇花安東澳南澳段隧道新建工程動土 卓揆：滿足東部觀光、產業及醫療轉診需求 強化整體交通服務量能",
-        "source": "行政院",
-        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
-        "fetched_at": "2026-11-07T15:27:29+08:00"
+        "fetched_at": "2026-11-07T22:16:47+08:00"
       }
     ],
     "world": [
@@ -55,49 +55,49 @@
         "title": "臺灣投資“不對稱”無人艇 應對海上灰色地帶騷擾",
         "source": "VOA",
         "url": "https://www.voachinese.com/a/taiwan-sea-drones-20261106/8219964.html",
-        "fetched_at": "2026-11-07T15:27:29+08:00"
+        "fetched_at": "2026-11-07T22:16:47+08:00"
       },
       {
         "title": "臺灣無黨籍立委高金素梅涉接受中國資金違反國安法等罪嫌被起訴",
         "source": "VOA",
         "url": "https://www.voachinese.com/a/taiwan-legislator-indicted-for-violating-national-security-law-in-taking-funds-from-china-20261106/8219845.html",
-        "fetched_at": "2026-11-07T15:27:29+08:00"
+        "fetched_at": "2026-11-07T22:16:47+08:00"
       },
       {
         "title": "美英等10國政府譴責香港重判民主派活動人士黃之鋒",
         "source": "VOA",
         "url": "https://www.voachinese.com/a/rubio-and-governments-from-us-uk-and-8-other-nations-condemn-hong-kong-sentencing-of-joshua-wong-20261106/8219727.html",
-        "fetched_at": "2026-11-07T15:27:29+08:00"
+        "fetched_at": "2026-11-07T22:16:47+08:00"
       },
       {
         "title": "特朗普稱將很快就伊朗問題作出決定，卡達則強調外交途徑",
         "source": "VOA",
         "url": "https://www.voachinese.com/a/trump-says-he-will-soon-decide-on-iran-as-qatar-emphasizes-diplomacy-20261106/8219718.html",
-        "fetched_at": "2026-11-07T15:27:29+08:00"
+        "fetched_at": "2026-11-07T22:16:47+08:00"
       },
       {
         "title": "美國發布新一波古巴制裁名單，兩家中國公司在列",
         "source": "VOA",
         "url": "https://www.voachinese.com/a/two-chinese-companies-sanctioned-by-the-u-s-over-cuba-20261106/8219644.html",
-        "fetched_at": "2026-11-07T15:27:29+08:00"
+        "fetched_at": "2026-11-07T22:16:47+08:00"
       },
       {
         "title": "澳門首宗國安案宣判 前議員區錦新因顛覆等罪遭判刑12年半",
         "source": "VOA",
         "url": "https://www.voachinese.com/a/former-pro-democracy-lawmaker-sentenced-to-12-1-2-years-in-macao-s-first-national-security-case-20261106/8219626.html",
-        "fetched_at": "2026-11-07T15:27:29+08:00"
+        "fetched_at": "2026-11-07T22:16:47+08:00"
       },
       {
         "title": "臺灣國防部長：持續與美國會溝通 確保軍售案如期進行",
         "source": "VOA",
         "url": "https://www.voachinese.com/a/taiwan-arms-sales-20261105/8219613.html",
-        "fetched_at": "2026-11-07T15:27:29+08:00"
+        "fetched_at": "2026-11-07T22:16:47+08:00"
       },
       {
         "title": "美國中期選舉後，140億美元對臺軍售案再受關注",
         "source": "VOA",
         "url": "https://www.voachinese.com/a/taiwan-defense-minister-said-after-u-s-midterm-elections-that-american-support-for-island-s-defense-remains-bipartisan-20261105/8219427.html",
-        "fetched_at": "2026-11-07T15:27:29+08:00"
+        "fetched_at": "2026-11-07T22:16:47+08:00"
       }
     ],
     "attributions": [
@@ -120,201 +120,201 @@
     "by_county": {
       "CYQ": {
         "name": "嘉義縣",
-        "t_min_c": 27,
-        "t_max_c": 31,
+        "t_min_c": 23,
+        "t_max_c": 24,
         "summary": "晴",
         "note": null,
-        "t_now_c": 29.8,
-        "observed_at": "2026-11-07T15:10:00+08:00"
+        "t_now_c": 25.3,
+        "observed_at": "2026-11-07T22:00:00+08:00"
       },
       "NWT": {
         "name": "新北市",
-        "t_min_c": 24,
-        "t_max_c": 26,
+        "t_min_c": 22,
+        "t_max_c": 23,
         "summary": "陰",
         "note": null,
-        "t_now_c": 22.9,
-        "observed_at": "2026-11-07T15:10:00+08:00"
+        "t_now_c": 22,
+        "observed_at": "2026-11-07T22:00:00+08:00"
       },
       "CYI": {
         "name": "嘉義市",
-        "t_min_c": 27,
-        "t_max_c": 32,
-        "summary": "多雲",
+        "t_min_c": 22,
+        "t_max_c": 24,
+        "summary": "晴",
         "note": null,
-        "t_now_c": 30.3,
-        "observed_at": "2026-11-07T15:10:00+08:00"
+        "t_now_c": 24.9,
+        "observed_at": "2026-11-07T22:00:00+08:00"
       },
       "HSQ": {
         "name": "新竹縣",
-        "t_min_c": 24,
-        "t_max_c": 29,
+        "t_min_c": 22,
+        "t_max_c": 23,
         "summary": "晴",
         "note": null,
-        "t_now_c": 26.8,
-        "observed_at": "2026-11-07T15:10:00+08:00"
+        "t_now_c": 23.1,
+        "observed_at": "2026-11-07T22:00:00+08:00"
       },
       "HSZ": {
         "name": "新竹市",
-        "t_min_c": 25,
-        "t_max_c": 29,
+        "t_min_c": 22,
+        "t_max_c": 23,
         "summary": "晴",
         "note": null,
-        "t_now_c": 27.5,
-        "observed_at": "2026-11-07T15:10:00+08:00"
+        "t_now_c": 24.1,
+        "observed_at": "2026-11-07T22:00:00+08:00"
       },
       "TPE": {
         "name": "臺北市",
-        "t_min_c": 24,
-        "t_max_c": 26,
-        "summary": "陰",
+        "t_min_c": 22,
+        "t_max_c": 23,
+        "summary": "多雲",
         "note": null,
-        "t_now_c": 23.9,
-        "observed_at": "2026-11-07T15:10:00+08:00"
+        "t_now_c": 22.8,
+        "observed_at": "2026-11-07T22:00:00+08:00"
       },
       "TNN": {
         "name": "臺南市",
-        "t_min_c": 27,
-        "t_max_c": 29,
+        "t_min_c": 24,
+        "t_max_c": 25,
         "summary": "晴",
         "note": null,
-        "t_now_c": 29.3,
-        "observed_at": "2026-11-07T15:10:00+08:00"
+        "t_now_c": 25.5,
+        "observed_at": "2026-11-07T22:00:00+08:00"
       },
       "ILA": {
         "name": "宜蘭縣",
-        "t_min_c": 22,
-        "t_max_c": 23,
-        "summary": "陰有雨",
-        "note": null,
-        "t_now_c": 22.3,
-        "observed_at": "2026-11-07T15:10:00+08:00"
-      },
-      "MIA": {
-        "name": "苗栗縣",
-        "t_min_c": 26,
-        "t_max_c": 32,
-        "summary": "晴",
-        "note": null,
-        "t_now_c": 29.4,
-        "observed_at": "2026-11-07T15:10:00+08:00"
-      },
-      "YUN": {
-        "name": "雲林縣",
-        "t_min_c": 27,
-        "t_max_c": 32,
-        "summary": "晴",
-        "note": null,
-        "t_now_c": 30,
-        "observed_at": "2026-11-07T15:10:00+08:00"
-      },
-      "HUA": {
-        "name": "花蓮縣",
-        "t_min_c": 24,
-        "t_max_c": 25,
-        "summary": "陰",
-        "note": null,
-        "t_now_c": 22.3,
-        "observed_at": "2026-11-07T15:10:00+08:00"
-      },
-      "TXG": {
-        "name": "臺中市",
-        "t_min_c": 27,
-        "t_max_c": 32,
-        "summary": "晴",
-        "note": null,
-        "t_now_c": 29.1,
-        "observed_at": "2026-11-07T15:10:00+08:00"
-      },
-      "TTT": {
-        "name": "臺東縣",
-        "t_min_c": 24,
-        "t_max_c": 27,
-        "summary": "陰",
-        "note": null,
-        "t_now_c": 23.7,
-        "observed_at": "2026-11-07T15:10:00+08:00"
-      },
-      "TAO": {
-        "name": "桃園市",
-        "t_min_c": 24,
-        "t_max_c": 26,
-        "summary": "晴",
-        "note": null,
-        "t_now_c": 25.1,
-        "observed_at": "2026-11-07T15:10:00+08:00"
-      },
-      "NAN": {
-        "name": "南投縣",
-        "t_min_c": 27,
-        "t_max_c": 31,
-        "summary": "多雲",
-        "note": null,
-        "t_now_c": 29.8,
-        "observed_at": "2026-11-07T15:10:00+08:00"
-      },
-      "KHH": {
-        "name": "高雄市",
-        "t_min_c": 28,
-        "t_max_c": 30,
-        "summary": "陰",
-        "note": null,
-        "t_now_c": 28,
-        "observed_at": "2026-11-07T15:10:00+08:00"
-      },
-      "KIN": {
-        "name": "金門縣",
-        "t_min_c": 24,
-        "t_max_c": 27,
-        "summary": "陰",
-        "note": null,
-        "t_now_c": 24.7,
-        "observed_at": "2026-11-07T15:10:00+08:00"
-      },
-      "PIF": {
-        "name": "屏東縣",
-        "t_min_c": 28,
-        "t_max_c": 31,
-        "summary": "陰",
-        "note": null,
-        "t_now_c": 27,
-        "observed_at": "2026-11-07T15:10:00+08:00"
-      },
-      "KEE": {
-        "name": "基隆市",
-        "t_min_c": 23,
-        "t_max_c": 25,
-        "summary": "陰",
-        "note": null,
-        "t_now_c": 21.8,
-        "observed_at": "2026-11-07T15:10:00+08:00"
-      },
-      "PEN": {
-        "name": "澎湖縣",
-        "t_min_c": 25,
-        "t_max_c": 28,
-        "summary": "晴",
-        "note": null,
-        "t_now_c": 26.9,
-        "observed_at": "2026-11-07T15:10:00+08:00"
-      },
-      "CHA": {
-        "name": "彰化縣",
-        "t_min_c": 27,
-        "t_max_c": 32,
-        "summary": "晴",
-        "note": null,
-        "t_now_c": 30.7,
-        "observed_at": "2026-11-07T15:10:00+08:00"
-      },
-      "LIE": {
-        "name": "連江縣",
         "t_min_c": 21,
         "t_max_c": 22,
         "summary": "陰",
         "note": null,
-        "t_now_c": 21.4,
-        "observed_at": "2026-11-07T15:10:00+08:00"
+        "t_now_c": 21,
+        "observed_at": "2026-11-07T22:00:00+08:00"
+      },
+      "MIA": {
+        "name": "苗栗縣",
+        "t_min_c": 21,
+        "t_max_c": 23,
+        "summary": "晴",
+        "note": null,
+        "t_now_c": 23.1,
+        "observed_at": "2026-11-07T22:00:00+08:00"
+      },
+      "YUN": {
+        "name": "雲林縣",
+        "t_min_c": 22,
+        "t_max_c": 24,
+        "summary": "晴",
+        "note": null,
+        "t_now_c": 25.2,
+        "observed_at": "2026-11-07T22:00:00+08:00"
+      },
+      "HUA": {
+        "name": "花蓮縣",
+        "t_min_c": 22,
+        "t_max_c": 23,
+        "summary": "陰有雨",
+        "note": null,
+        "t_now_c": 20.9,
+        "observed_at": "2026-11-07T22:00:00+08:00"
+      },
+      "TXG": {
+        "name": "臺中市",
+        "t_min_c": 23,
+        "t_max_c": 25,
+        "summary": "晴",
+        "note": null,
+        "t_now_c": 25.3,
+        "observed_at": "2026-11-07T22:00:00+08:00"
+      },
+      "TTT": {
+        "name": "臺東縣",
+        "t_min_c": 22,
+        "t_max_c": 23,
+        "summary": "多雲",
+        "note": null,
+        "t_now_c": 21.5,
+        "observed_at": "2026-11-07T22:00:00+08:00"
+      },
+      "TAO": {
+        "name": "桃園市",
+        "t_min_c": 22,
+        "t_max_c": 23,
+        "summary": "晴",
+        "note": null,
+        "t_now_c": 23,
+        "observed_at": "2026-11-07T22:00:00+08:00"
+      },
+      "NAN": {
+        "name": "南投縣",
+        "t_min_c": 22,
+        "t_max_c": 24,
+        "summary": "晴",
+        "note": null,
+        "t_now_c": 23.8,
+        "observed_at": "2026-11-07T22:00:00+08:00"
+      },
+      "KHH": {
+        "name": "高雄市",
+        "t_min_c": 25,
+        "t_max_c": 26,
+        "summary": "晴",
+        "note": null,
+        "t_now_c": 24.3,
+        "observed_at": "2026-11-07T22:00:00+08:00"
+      },
+      "KIN": {
+        "name": "金門縣",
+        "t_min_c": 22,
+        "t_max_c": 23,
+        "summary": "多雲",
+        "note": null,
+        "t_now_c": 22.7,
+        "observed_at": "2026-11-07T22:00:00+08:00"
+      },
+      "PIF": {
+        "name": "屏東縣",
+        "t_min_c": 24,
+        "t_max_c": 25,
+        "summary": "晴",
+        "note": null,
+        "t_now_c": 24.7,
+        "observed_at": "2026-11-07T22:00:00+08:00"
+      },
+      "KEE": {
+        "name": "基隆市",
+        "t_min_c": 22,
+        "t_max_c": 23,
+        "summary": "陰",
+        "note": null,
+        "t_now_c": 21.8,
+        "observed_at": "2026-11-07T22:00:00+08:00"
+      },
+      "PEN": {
+        "name": "澎湖縣",
+        "t_min_c": 24,
+        "t_max_c": 25,
+        "summary": "晴",
+        "note": null,
+        "t_now_c": 25,
+        "observed_at": "2026-11-07T22:00:00+08:00"
+      },
+      "CHA": {
+        "name": "彰化縣",
+        "t_min_c": 23,
+        "t_max_c": 25,
+        "summary": "晴",
+        "note": null,
+        "t_now_c": 25.6,
+        "observed_at": "2026-11-07T22:00:00+08:00"
+      },
+      "LIE": {
+        "name": "連江縣",
+        "t_min_c": 21,
+        "t_max_c": 21,
+        "summary": "陰",
+        "note": null,
+        "t_now_c": 21.2,
+        "observed_at": "2026-11-07T22:00:00+08:00"
       }
     }
   },
@@ -332,48 +332,53 @@
     "items": [
       {
         "rank": 1,
-        "term": "勞動部",
-        "url": "https://trends.google.com/trends/explore?q=%E5%8B%9E%E5%8B%95%E9%83%A8&geo=TW"
+        "term": "曾聖凱",
+        "url": "https://trends.google.com/trends/explore?q=%E6%9B%BE%E8%81%96%E5%87%B1&geo=TW"
       },
       {
         "rank": 2,
-        "term": "亞冠賽熱身賽",
-        "url": "https://trends.google.com/trends/explore?q=%E4%BA%9E%E5%86%A0%E8%B3%BD%E7%86%B1%E8%BA%AB%E8%B3%BD&geo=TW"
+        "term": "普 發 一 萬",
+        "url": "https://trends.google.com/trends/explore?q=%E6%99%AE+%E7%99%BC+%E4%B8%80+%E8%90%AC&geo=TW"
       },
       {
         "rank": 3,
-        "term": "查帕卡",
-        "url": "https://trends.google.com/trends/explore?q=%E6%9F%A5%E5%B8%95%E5%8D%A1&geo=TW"
+        "term": "飲食",
+        "url": "https://trends.google.com/trends/explore?q=%E9%A3%B2%E9%A3%9F&geo=TW"
       },
       {
         "rank": 4,
-        "term": "戰鬥機",
-        "url": "https://trends.google.com/trends/explore?q=%E6%88%B0%E9%AC%A5%E6%A9%9F&geo=TW"
+        "term": "wtt",
+        "url": "https://trends.google.com/trends/explore?q=wtt&geo=TW"
       },
       {
         "rank": 5,
-        "term": "luka doncic",
-        "url": "https://trends.google.com/trends/explore?q=luka+doncic&geo=TW"
+        "term": "沈伯洋身高",
+        "url": "https://trends.google.com/trends/explore?q=%E6%B2%88%E4%BC%AF%E6%B4%8B%E8%BA%AB%E9%AB%98&geo=TW"
+      },
+      {
+        "rank": 6,
+        "term": "明天的天氣",
+        "url": "https://trends.google.com/trends/explore?q=%E6%98%8E%E5%A4%A9%E7%9A%84%E5%A4%A9%E6%B0%A3&geo=TW"
       },
       {
         "rank": 7,
-        "term": "00406a",
-        "url": "https://trends.google.com/trends/explore?q=00406a&geo=TW"
+        "term": "weather tomorrow",
+        "url": "https://trends.google.com/trends/explore?q=weather+tomorrow&geo=TW"
       },
       {
         "rank": 8,
-        "term": "alice huang",
-        "url": "https://trends.google.com/trends/explore?q=alice+huang&geo=TW"
+        "term": "徐國勇",
+        "url": "https://trends.google.com/trends/explore?q=%E5%BE%90%E5%9C%8B%E5%8B%87&geo=TW"
       },
       {
         "rank": 9,
-        "term": "吳映潔",
-        "url": "https://trends.google.com/trends/explore?q=%E5%90%B3%E6%98%A0%E6%BD%94&geo=TW"
+        "term": "thời tiết ngày mai",
+        "url": "https://trends.google.com/trends/explore?q=th%E1%BB%9Di+ti%E1%BA%BFt+ng%C3%A0y+mai&geo=TW"
       },
       {
         "rank": 10,
-        "term": "奧斯汀·里夫斯",
-        "url": "https://trends.google.com/trends/explore?q=%E5%A5%A7%E6%96%AF%E6%B1%80%C2%B7%E9%87%8C%E5%A4%AB%E6%96%AF&geo=TW"
+        "term": "陳又新",
+        "url": "https://trends.google.com/trends/explore?q=%E9%99%B3%E5%8F%88%E6%96%B0&geo=TW"
       }
     ]
   },
@@ -384,6 +389,6 @@
   "signature": {
     "alg": "ed25519",
     "key_id": "2026-10",
-    "sig": "BwvpbFSzlK1xDC1XMyQbn8z+SiBA0mCmHuxa0wkEwTJNljdBhUQOWO7Tije5Dg0Abyn7egsDLWnXeck9Tez7BQ=="
+    "sig": "JmIeWt75xkiCZTf+dHltqfYkjYYsDavWxsdCsTW+WK7ZqlgaiCkK8ed2JcjTYGMKgGQipMdRYuv7Qcf7jphWAw=="
   }
 }
