@@ -8,7 +8,7 @@
 
 | 路徑 | 用途 |
 | --- | --- |
-| `packages/schema` | 寫入端 schema（`snapshot-v1.1.json`）與凍結的 minor 0 讀取端 schema |
+| `packages/schema` | 寫入端 schema（`snapshot-v1.3.json`）與凍結的 minor 0 讀取端 schema |
 | `packages/snapshot` | 蒐集、SSRF 防護、RSS、簽章、歸檔寫入 |
 | `pipeline/snapshot` | `canary` / `collect` / `gaps` 進入點 |
 | `fixtures/snapshot`、`fixtures/registry` | 舊資料、新資料與價格品項 fixture |
@@ -23,9 +23,7 @@
 
 | 來源 | 用法 | 出處 |
 | --- | --- | --- |
-| 行政院開放資料 | 只存標題，不存內文。資料集 `https://www.ey.gov.tw/NewOpenData/JSON/154` | 行政院。政府資料開放授權條款第 1 版。使用時應註明出處。https://data.gov.tw/license |
 | Google Trends | RSS `https://trends.google.com/trending/rss?geo=<地區>`。不抓 explore 頁，也不存新聞標題或圖片 | Google Trends。再使用時請註明 Google。https://support.google.com/trends/answer/4365538?hl=en |
-| 美國之音 | RSS `https://www.voachinese.com/api/zm_yql-vomx-tpeybti`。排除 AP、Reuters、AFP 素材 | VOA 自製內容屬於公有領域，引用請註明 VOA。https://www.voanews.com/p/5338.html |
 | 中央氣象署 | `F-C0032-001`（預報）與 `O-A0003-001`（現在天氣觀測，縣市內海拔 500 公尺以下測站取中位數；讀不到時退回預報），`Authorization` header，金鑰不進 URL | 中央氣象署開放資料（氣象資料開放平台） |
 | KKBOX | Open API `client_credentials` 取 token，`/v1.1/charts?territory=TW` 依標題找「華語單曲日榜」，再取 `/charts/<id>/tracks` 前 3 名。金鑰與 token 不進 URL | KKBOX，`songs.source` 為 `KKBOX 華語單曲日榜` |
 

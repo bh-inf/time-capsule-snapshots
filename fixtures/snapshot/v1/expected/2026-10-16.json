@@ -5,19 +5,6 @@
   "region": "TW",
   "date": "2026-10-16",
   "generated_at": "2026-10-16T21:31:07+08:00",
-  "news": {
-    "taiwan": [
-      {
-        "title": "（測試）行政院標題",
-        "source": "行政院",
-        "url": "https://www.ey.gov.tw/NewOpenData/JSON/154",
-        "fetched_at": "2026-10-16T21:30:12+08:00"
-      }
-    ],
-    "world": [],
-    "attributions": [],
-    "filtered_wire_services": 0
-  },
   "weather": {
     "source": "中央氣象署",
     "by_county": {

@@ -57,9 +57,7 @@ function kkbox(overrides?: { token?: number; charts?: string; tracks?: string })
       }
       if (url.startsWith("https://api.kkbox.com/v1.1/charts?")) return ok(overrides?.charts ?? CHARTS);
       if (url.startsWith("https://api.kkbox.com/v1.1/charts/DZrC8m29ciOFY2JAm3/tracks?")) return ok(overrides?.tracks ?? TRACKS);
-      if (url.includes("NewOpenData/JSON/154")) return ok(JSON.stringify([{ 標題: "標題" }]));
-      if (url.includes("voachinese.com")) return ok("<rss><channel></channel></rss>", 500);
-      if (url.includes("/trending/rss")) return ok("", 500);
+      if (url.includes("/trending/rss")) return ok("<rss><channel><item><title>測試搜尋</title><link>https://trends.google.com/trending/rss?geo=TW</link></item></channel></rss>");
       if (url.includes("opendata.cwa.gov.tw")) return ok("", 500);
       throw new Error(`unexpected fetch ${url}`);
     },

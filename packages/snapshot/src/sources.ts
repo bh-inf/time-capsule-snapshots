@@ -1,24 +1,8 @@
-export const EY_NEWS_URL = "https://www.ey.gov.tw/NewOpenData/JSON/154";
-export const EY_LICENSE_URL = "https://data.gov.tw/license";
-export const VOA_NEWS_URL = "https://www.voachinese.com/api/zm_yql-vomx-tpeybti";
-export const VOA_TERMS_URL = "https://www.voanews.com/p/5338.html";
 export const CWA_FORECAST_URL =
   "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?format=JSON";
 export const CWA_OBSERVATION_URL =
   "https://opendata.cwa.gov.tw/api/v1/rest/datastore/O-A0003-001?format=JSON";
 export const TRENDS_TERMS_URL = "https://support.google.com/trends/answer/4365538?hl=en";
-
-export const EY_ATTRIBUTION = {
-  source: "行政院",
-  license: "政府資料開放授權條款－第1版。使用時應註明出處。",
-  url: EY_LICENSE_URL,
-} as const;
-
-export const VOA_ATTRIBUTION = {
-  source: "VOA",
-  license: "VOA 自製內容屬於公有領域，引用請註明 VOA。已排除 AP、Reuters、AFP 素材。標題由簡體轉成繁體。",
-  url: VOA_TERMS_URL,
-} as const;
 
 export const TRENDS_ATTRIBUTION =
   "Google Trends。依 Google 服務條款使用；再使用時請註明 Google。https://support.google.com/trends/answer/4365538?hl=en";

@@ -15,6 +15,7 @@ describe("frozen schema and registry", () => {
     expect(read("v1/schema/snapshot-v1.0.json")).toBe(readSchemaText("snapshot-v1.0.json"));
     expect(read("v1/schema/snapshot-v1.1.json")).toBe(readSchemaText("snapshot-v1.1.json"));
     expect(read("v1/schema/snapshot-v1.2.json")).toBe(readSchemaText("snapshot-v1.2.json"));
+    expect(read("v1/schema/snapshot-v1.3.json")).toBe(readSchemaText("snapshot-v1.3.json"));
     expect(trendsUrlPattern()).toBe("^https://\\S+$");
     expect(trendsUrlPattern()).not.toContain("geo=TW");
     const registry = read("fixtures/registry/v1/price-items.json");

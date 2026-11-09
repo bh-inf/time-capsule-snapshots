@@ -2,28 +2,21 @@ import { SCHEMA_URL } from "@time-capsule/schema";
 import { HttpBytes, safeFetch, scrubSecrets, type OneShot } from "./fetch.ts";
 import { cleanText, parseRssItems } from "./rss.ts";
 import { taipeiParts } from "./time.ts";
-import { hasSimplifiedChinese, toTraditionalChinese } from "./script.ts";
-import { isWireService } from "./wire.ts";
-import { assertPublicHttpsUrl } from "./url-policy.ts";
+import { hasSimplifiedChinese } from "./script.ts";
 import {
   COUNTY_CODES,
   CWA_ATTRIBUTION,
   CWA_FORECAST_URL,
   CWA_OBSERVATION_URL,
-  EY_ATTRIBUTION,
-  EY_NEWS_URL,
   TRENDS_ATTRIBUTION,
   TW,
-  VOA_ATTRIBUTION,
-  VOA_NEWS_URL,
   trendsExploreUrl,
   trendsRssUrl,
   type RegionProfile,
 } from "./sources.ts";
-import type { Headline, Snapshot } from "./normalize.ts";
+import type { Snapshot } from "./normalize.ts";
 import { collectKkboxSongs, type KkboxCredentials } from "./songs.ts";
 
-const HEADLINE_LIMIT = 8;
 const TREND_LIMIT = 10;
 
 export class SnapshotError extends Error {
@@ -68,125 +61,6 @@ async function fetchText(
     }
   }
   throw last instanceof Error ? last : new Error("fetch failed");
-}
-
-function storeableHttps(url: string): string | null {
-  try {
-    return assertPublicHttpsUrl(url).toString();
-  } catch {
-    return null;
-  }
-}
-
-function readJsonString(text: string, quoteAt: number): { value: string; next: number } | null {
-  if (text[quoteAt] !== '"') return null;
-  let out = "";
-  for (let i = quoteAt + 1; i < text.length; i += 1) {
-    const char = text[i]!;
-    if (char === '"') return { value: out, next: i + 1 };
-    if (char !== "\\") {
-      out += char;
-      continue;
-    }
-    const next = text[i + 1];
-    if (!next) return null;
-    const simple: Record<string, string> = { '"': '"', "\\": "\\", "/": "/", b: "\b", f: "\f", n: "\n", r: "\r", t: "\t" };
-    if (simple[next]) {
-      out += simple[next];
-      i += 1;
-      continue;
-    }
-    if (next === "u") {
-      const hex = text.slice(i + 2, i + 6);
-      if (!/^[0-9a-fA-F]{4}$/.test(hex)) return null;
-      out += String.fromCharCode(Number.parseInt(hex, 16));
-      i += 5;
-      continue;
-    }
-    return null;
-  }
-  return null;
-}
-
-export function parseExecutiveYuanTitles(prefix: string, limit = HEADLINE_LIMIT): string[] {
-  const titles: string[] = [];
-  let cursor = 0;
-  while (titles.length < limit) {
-    const key = prefix.indexOf('"標題"', cursor);
-    if (key < 0) break;
-    const colon = prefix.indexOf(":", key + 4);
-    if (colon < 0) break;
-    const quote = prefix.indexOf('"', colon + 1);
-    if (quote < 0) break;
-    const parsed = readJsonString(prefix, quote);
-    if (!parsed) break;
-    const title = cleanText(parsed.value);
-    if (title) titles.push(title);
-    cursor = parsed.next;
-  }
-  return titles;
-}
-
-function headlinesFromTitles(titles: string[], source: string, url: string, fetchedAt: string): Headline[] {
-  const seen = new Set<string>();
-  const items: Headline[] = [];
-  for (const title of titles) {
-    const cleaned = [...cleanText(title)].slice(0, 180).join("");
-    if (!cleaned || seen.has(cleaned) || hasSimplifiedChinese(cleaned)) continue;
-    seen.add(cleaned);
-    const stored = storeableHttps(url);
-    if (!stored) continue;
-    items.push({ title: cleaned, source, url: stored, fetched_at: fetchedAt });
-    if (items.length >= HEADLINE_LIMIT) break;
-  }
-  return items;
-}
-
-async function collectTaiwan(options: CollectOptions, fetchedAt: string): Promise<SourceResult<Headline[]>> {
-  let response: HttpBytes;
-  try {
-    response = await fetchText(EY_NEWS_URL, options, { maxBytes: 512_000, allowPrefix: true });
-  } catch {
-    return { ok: false };
-  }
-  if (response.status < 200 || response.status >= 300) return { ok: false };
-  const titles = parseExecutiveYuanTitles(response.text());
-  if (titles.length === 0) throw new SnapshotError("canary parse failed for news.taiwan");
-  return { ok: true, value: headlinesFromTitles(titles, "行政院", EY_NEWS_URL, fetchedAt) };
-}
-
-async function collectWorld(options: CollectOptions, fetchedAt: string): Promise<SourceResult<{ items: Headline[]; filtered: number }>> {
-  let response: HttpBytes;
-  try {
-    response = await fetchText(VOA_NEWS_URL, options, { maxBytes: 512_000 });
-  } catch {
-    return { ok: false };
-  }
-  if (response.status < 200 || response.status >= 300) return { ok: false };
-  let items: ReturnType<typeof parseRssItems>;
-  try {
-    items = parseRssItems(response.text(), 40);
-  } catch (error) {
-    throw new SnapshotError(`canary parse failed for news.world: ${error instanceof Error ? error.message : "parse"}`);
-  }
-  if (items.length === 0) throw new SnapshotError("canary parse failed for news.world");
-  let filtered = 0;
-  const kept: Headline[] = [];
-  const seen = new Set<string>();
-  for (const item of items) {
-    if (isWireService(item.author, item.source, item.title)) {
-      filtered += 1;
-      continue;
-    }
-    const title = [...toTraditionalChinese(cleanText(item.title))].slice(0, 180).join("");
-    const url = storeableHttps(item.link);
-    if (!title || !url || seen.has(title) || hasSimplifiedChinese(title)) continue;
-    seen.add(title);
-    kept.push({ title, source: "VOA", url, fetched_at: fetchedAt });
-    if (kept.length >= HEADLINE_LIMIT) break;
-  }
-  if (kept.length === 0) return { ok: false };
-  return { ok: true, value: { items: kept, filtered } };
 }
 
 type CwaElement = {
@@ -381,20 +255,16 @@ export async function collectSnapshot(options: CollectOptions = {}): Promise<Sna
   if (options.requireConfiguredSources && !options.cwaApiKey?.trim()) {
     throw new SnapshotError("CWA_API_KEY is required");
   }
-  const [taiwan, world, weather, trends, songs] = await Promise.all([
-    collectTaiwan(options, generatedAt),
-    collectWorld(options, generatedAt),
+  const [weather, trends, songs] = await Promise.all([
     collectWeather(options, now),
     collectTrends(options, region),
     collectKkboxSongs(options.kkbox, { oneShot: options.oneShot, snapshotDate: date }),
   ]);
-  // Songs never block a day: news and weather cannot be fetched again later.
+  // Songs never block a day: weather cannot be fetched again later.
   if (!songs.ok && songs.problem) options.onWarning?.(`songs parse failed: ${songs.problem}`);
-  const networkOk = [taiwan.ok, world.ok, weather.ok, trends.ok].filter(Boolean).length;
+  const networkOk = [weather.ok, trends.ok].filter(Boolean).length;
   if (networkOk === 0) throw new SnapshotError("all network sources failed");
   const missing: string[] = [];
-  if (!taiwan.ok) missing.push("news.taiwan");
-  if (!world.ok) missing.push("news.world");
   if (!weather.ok) missing.push("weather");
   if (!trends.ok) missing.push("trends");
   const prices = options.priceObservations ?? [];
@@ -403,16 +273,10 @@ export async function collectSnapshot(options: CollectOptions = {}): Promise<Sna
   return {
     schema: SCHEMA_URL,
     schema_version: 1,
-    schema_minor: 2,
+    schema_minor: 3,
     region: region.code,
     date,
     generated_at: generatedAt,
-    news: {
-      taiwan: taiwan.ok ? taiwan.value : [],
-      world: world.ok ? world.value.items : [],
-      attributions: [EY_ATTRIBUTION, VOA_ATTRIBUTION],
-      filtered_wire_services: world.ok ? world.value.filtered : 0,
-    },
     weather: {
       source: "中央氣象署",
       attribution: CWA_ATTRIBUTION,
