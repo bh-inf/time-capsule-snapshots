@@ -12,19 +12,16 @@ export {
   type OneShot,
 } from "./fetch.ts";
 export { cleanText, decodeXmlEntities, extractElements, parseRssItems } from "./rss.ts";
-export { hasSimplifiedChinese, toTraditionalChinese } from "./script.ts";
-export { isWireService } from "./wire.ts";
+export { hasSimplifiedChinese } from "./script.ts";
 export {
   CWA_FORECAST_URL,
   CWA_OBSERVATION_URL,
-  EY_NEWS_URL,
   TRENDS_ATTRIBUTION,
   TW,
-  VOA_NEWS_URL,
   trendsExploreUrl,
   trendsRssUrl,
 } from "./sources.ts";
-export { SnapshotError, collectSnapshot, parseCwaForecast, parseCwaObservation, parseExecutiveYuanTitles } from "./collect.ts";
+export { SnapshotError, collectSnapshot, parseCwaForecast, parseCwaObservation } from "./collect.ts";
 export {
   KKBOX_CHART_TITLE,
   SongsParseError,

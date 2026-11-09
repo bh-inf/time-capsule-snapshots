@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@time-capsule/schema": "workspace:*",
-    "opencc-js": "1.4.2",
     "undici": "7.30.1"
   }
 }

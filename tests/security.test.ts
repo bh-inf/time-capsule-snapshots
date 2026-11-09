@@ -8,7 +8,6 @@ import {
   decodeXmlEntities,
   isBlockedAddress,
   isThreadsHost,
-  isWireService,
   parseRssItems,
   redactUrl,
   safeFetch,
@@ -161,19 +160,6 @@ describe("rss", () => {
     const started = Date.now();
     expect(parseRssItems(xml, 5)).toEqual([]);
     expect(Date.now() - started).toBeLessThan(1_000);
-  });
-});
-
-describe("wire services", () => {
-  it("drops AP, Reuters, and AFP without dropping unrelated titles", () => {
-    expect(isWireService("chinese@voanews.com (AP)", "", "某標題")).toBe(true);
-    expect(isWireService("(Reuters)", "", "某標題")).toBe(true);
-    expect(isWireService("AFP", "", "某標題")).toBe(true);
-    expect(isWireService("", "Associated Press", "")).toBe(true);
-    expect(isWireService("", "", "路透：某事")).toBe(true);
-    expect(isWireService("", "", "法新社：某事")).toBe(true);
-    expect(isWireService("", "", "美联社：某事")).toBe(true);
-    expect(isWireService("chinese@voanews.com (美國之音)", "", "Apple 發布新產品")).toBe(false);
   });
 });
 

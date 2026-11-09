@@ -8,7 +8,7 @@
 - Threads（`threads.com`、`threads.net` 與子網域）在連線前就拒絕。
 - DNS 在連線當下解析。`undici` 的 `connect.lookup` 只使用通過檢查的位址。私網、loopback、link-local、CGNAT、ULA、IPv4-mapped、multicast、文件用網段都拒絕。同一筆答案裡只要混有非公開位址就整筆拒絕，所以 `127.0.0.1.nip.io` 這類名稱過不了。
 - Redirect 最多兩次，每一跳都重跑同一套檢查，而且 host 與 port 必須和最初的 URL 相同。預設 443 與明確的 `:443` 視為同一個 port。
-- 回應有大小上限。行政院 JSON 很大，只讀前段標題就中斷，不把內文存進快照。
+- 回應有大小上限，超過就中斷。
 - 紀錄與錯誤訊息會清掉 `Authorization` 與長度 32 以上的 hex。
 
 ## 簽章

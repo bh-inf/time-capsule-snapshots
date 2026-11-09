@@ -1,18 +1,5 @@
 import { SCHEMA_URL } from "@time-capsule/schema";
 
-export type Headline = {
-  title: string;
-  source: string;
-  url: string;
-  fetched_at: string;
-};
-
-export type Attribution = {
-  source: string;
-  license: string;
-  url?: string;
-};
-
 export type TrendItem = {
   rank: number;
   term: string;
@@ -26,12 +13,6 @@ export type Snapshot = {
   region: string;
   date: string;
   generated_at: string;
-  news: {
-    taiwan: Headline[];
-    world: Headline[];
-    attributions: Attribution[];
-    filtered_wire_services: number;
-  };
   weather: {
     source: string;
     attribution?: string;
@@ -91,19 +72,6 @@ function asRecord(value: unknown): Record<string, unknown> {
   return value as Record<string, unknown>;
 }
 
-function headlines(value: unknown): Headline[] {
-  if (!Array.isArray(value)) return [];
-  return value.map((item) => {
-    const record = asRecord(item);
-    return {
-      title: String(record.title ?? ""),
-      source: String(record.source ?? ""),
-      url: String(record.url ?? ""),
-      fetched_at: String(record.fetched_at ?? ""),
-    };
-  });
-}
-
 function trends(value: unknown): Snapshot["trends"] {
   const record = asRecord(value);
   const items = Array.isArray(record.items) ? record.items : [];
@@ -141,7 +109,6 @@ function providerIds(value: unknown): { provider_ids: Record<string, string> } |
 /** Project a document onto known fields. Unknown properties are dropped. */
 export function normalizeSnapshot(input: unknown): Snapshot {
   const record = asRecord(input);
-  const news = asRecord(record.news);
   const weather = asRecord(record.weather);
   const songs = asRecord(record.songs);
   const counties = asRecord(weather.by_county);
@@ -158,16 +125,6 @@ export function normalizeSnapshot(input: unknown): Snapshot {
       ...(typeof county.observed_at === "string" ? { observed_at: county.observed_at } : {}),
     };
   }
-  const attributions = Array.isArray(news.attributions)
-    ? news.attributions.map((item) => {
-        const attribution = asRecord(item);
-        return {
-          source: String(attribution.source ?? ""),
-          license: String(attribution.license ?? ""),
-          ...(typeof attribution.url === "string" ? { url: attribution.url } : {}),
-        };
-      })
-    : [];
   const minor = record.schema_minor === undefined ? 0 : Number(record.schema_minor);
   return {
     schema: typeof record.schema === "string" ? record.schema : SCHEMA_URL,
@@ -176,12 +133,6 @@ export function normalizeSnapshot(input: unknown): Snapshot {
     region: String(record.region ?? ""),
     date: String(record.date ?? ""),
     generated_at: String(record.generated_at ?? ""),
-    news: {
-      taiwan: headlines(news.taiwan),
-      world: headlines(news.world),
-      attributions,
-      filtered_wire_services: Number(news.filtered_wire_services ?? 0),
-    },
     weather: {
       source: String(weather.source ?? ""),
       ...(typeof weather.attribution === "string" ? { attribution: weather.attribution } : {}),
