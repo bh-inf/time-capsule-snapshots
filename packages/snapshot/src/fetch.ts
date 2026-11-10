@@ -1,6 +1,7 @@
 import { lookup as dnsLookup, type LookupAddress } from "node:dns";
 import { Agent, fetch as undiciFetch, type Dispatcher } from "undici";
 import { assertPublicAddresses } from "./address.ts";
+import { scrubSecrets } from "./scrub.ts";
 import { assertPublicHttpsUrl, sameOrigin } from "./url-policy.ts";
 
 export const USER_AGENT =
@@ -72,6 +73,8 @@ export function snapshotDispatcher(): Dispatcher {
   return sharedAgent;
 }
 
+export { scrubSecrets };
+
 export class HttpBytes {
   constructor(
     readonly status: number,
@@ -100,14 +103,6 @@ export function redactUrl(input: string): string {
   } catch {
     return "[redacted-url]";
   }
-}
-
-export function scrubSecrets(message: string, secrets: readonly string[]): string {
-  let text = message;
-  for (const secret of secrets) {
-    if (secret && secret.length >= 4) text = text.split(secret).join("[redacted]");
-  }
-  return text.replace(/\b[0-9a-fA-F]{32,}\b/g, "[redacted]");
 }
 
 async function readBody(response: { body: ReadableStream<Uint8Array> | null }, maxBytes: number, allowPrefix: boolean): Promise<Uint8Array> {

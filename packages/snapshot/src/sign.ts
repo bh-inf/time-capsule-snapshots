@@ -8,7 +8,7 @@ import {
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { canonicalJson } from "@time-capsule/schema";
-import { scrubSecrets } from "./fetch.ts";
+import { scrubSecrets } from "./scrub.ts";
 
 const ED25519_PKCS8_PREFIX = Buffer.from("302e020100300506032b657004220420", "hex");
 const ED25519_SPKI_PREFIX = Buffer.from("302a300506032b6570032100", "hex");
