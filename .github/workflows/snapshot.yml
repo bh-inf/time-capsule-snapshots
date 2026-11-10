@@ -21,8 +21,7 @@ jobs:
       contents: read
     env:
       SNAPSHOT_REQUIRE_SIGNATURE: "1"
-      SNAPSHOT_SIGNING_KEY_ID: ${{ vars.SNAPSHOT_SIGNING_KEY_ID }}
-      SNAPSHOT_OUTPUT_DIR: ${{ github.workspace }}/snapshot-out
+      SNAPSHOT_UNSIGNED_FILE: ${{ github.workspace }}/unsigned-out/unsigned.json
     steps:
       - uses: step-security/harden-runner@ccd8616d44fd3846e67624a50d5aad6d37bf2d25
         with:
@@ -36,20 +35,62 @@ jobs:
           node-version: 26
           cache: pnpm
       - run: pnpm install --frozen-lockfile --ignore-scripts
-      # Secrets are passed only to the steps that need them, not to install or third-party actions.
+      # This job runs the collector and its dependencies with the feed keys. It never sees the signing key.
       - name: Canary
         env:
           CWA_API_KEY: ${{ secrets.CWA_API_KEY }}
           KKBOX_CLIENT_ID: ${{ secrets.KKBOX_CLIENT_ID }}
           KKBOX_CLIENT_SECRET: ${{ secrets.KKBOX_CLIENT_SECRET }}
         run: pnpm snapshot:canary
-      - name: Collect and sign
+      - name: Collect
         env:
           CWA_API_KEY: ${{ secrets.CWA_API_KEY }}
           KKBOX_CLIENT_ID: ${{ secrets.KKBOX_CLIENT_ID }}
           KKBOX_CLIENT_SECRET: ${{ secrets.KKBOX_CLIENT_SECRET }}
+        run: |
+          mkdir -p unsigned-out
+          pnpm snapshot:collect-unsigned
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: snapshot-unsigned
+          path: unsigned-out
+          if-no-files-found: error
+          retention-days: 1
+
+  sign:
+    needs: collect
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: snapshot-publish
+    permissions:
+      contents: read
+    env:
+      SNAPSHOT_SIGNING_KEY_ID: ${{ vars.SNAPSHOT_SIGNING_KEY_ID }}
+      SNAPSHOT_OUTPUT_DIR: ${{ github.workspace }}/snapshot-out
+      SNAPSHOT_UNSIGNED_FILE: ${{ github.workspace }}/unsigned-in/unsigned.json
+    steps:
+      - uses: step-security/harden-runner@ccd8616d44fd3846e67624a50d5aad6d37bf2d25
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 26
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: snapshot-unsigned
+          path: unsigned-in
+      # Plain node, no collector, no tsx: only the signer, the schema check and the tree writer are loaded beside the key.
+      - name: Sign
+        env:
           SNAPSHOT_SIGNING_KEY_HEX: ${{ secrets.SNAPSHOT_SIGNING_KEY_HEX }}
-        run: pnpm snapshot:collect
+        run: node pipeline/snapshot/src/sign-main.ts
       - name: Parse collected JSON before upload
         run: python3 scripts/pre-push-check.py snapshot-out
       - name: Report date gaps
@@ -63,7 +104,7 @@ jobs:
           retention-days: 1
 
   publish:
-    needs: collect
+    needs: sign
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 15

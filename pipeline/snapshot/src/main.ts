@@ -1,5 +1,6 @@
 import { assertWriterSnapshot } from "@time-capsule/schema";
 import { collectSnapshot, findMissingDates, readIndex, signSnapshot, writeSnapshotTree } from "@time-capsule/snapshot";
+import { writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -9,7 +10,7 @@ function signatureRequired(): boolean {
   return process.env.SNAPSHOT_REQUIRE_SIGNATURE !== "0";
 }
 
-async function runCollect(write: boolean): Promise<void> {
+async function runCollect(write: boolean, unsignedFile?: string): Promise<void> {
   const required = signatureRequired();
   const snapshot = await collectSnapshot({
     now: process.env.SNAPSHOT_NOW ? new Date(process.env.SNAPSHOT_NOW) : new Date(),
@@ -21,6 +22,11 @@ async function runCollect(write: boolean): Promise<void> {
     requireConfiguredSources: required,
     onWarning: (message) => console.log(`::warning::${message}`),
   });
+  if (unsignedFile) {
+    writeFileSync(unsignedFile, `${JSON.stringify({ ...snapshot, signature: null })}\n`, { flag: "wx" });
+    console.log(JSON.stringify({ ok: true, unsigned: true, date: snapshot.date }));
+    return;
+  }
   if (!write) {
     console.log(JSON.stringify({ ok: true, canary: true, date: snapshot.date, missing: snapshot.missing }));
     return;
@@ -51,11 +57,15 @@ function reportGaps(): void {
 const command = process.argv[2] ?? "collect";
 if (command === "canary") {
   await runCollect(false);
+} else if (command === "collect-unsigned") {
+  const target = process.env.SNAPSHOT_UNSIGNED_FILE;
+  if (!target) throw new Error("SNAPSHOT_UNSIGNED_FILE is required");
+  await runCollect(true, target);
 } else if (command === "collect") {
   await runCollect(true);
 } else if (command === "gaps") {
   reportGaps();
 } else {
-  console.error("usage: main.ts canary|collect|gaps");
+  console.error("usage: main.ts canary|collect|collect-unsigned|gaps");
   process.exit(1);
 }

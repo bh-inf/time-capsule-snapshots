@@ -7,6 +7,7 @@
   "scripts": {
     "canary": "tsx src/main.ts canary",
     "collect": "tsx src/main.ts collect",
+    "collect-unsigned": "tsx src/main.ts collect-unsigned",
     "gaps": "tsx src/main.ts gaps"
   },
   "dependencies": {
