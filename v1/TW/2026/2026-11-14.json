@@ -4,7 +4,7 @@
   "schema_minor": 3,
   "region": "TW",
   "date": "2026-11-14",
-  "generated_at": "2026-11-14T00:37:29+08:00",
+  "generated_at": "2026-11-14T06:44:09+08:00",
   "weather": {
     "source": "中央氣象署",
     "attribution": "中央氣象署開放資料（氣象資料開放平台）",
@@ -12,200 +12,200 @@
       "CYQ": {
         "name": "嘉義縣",
         "t_min_c": 21,
-        "t_max_c": 22,
-        "summary": "多雲",
+        "t_max_c": 26,
+        "summary": "陰",
         "note": null,
-        "t_now_c": 20.3,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 20,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "NWT": {
         "name": "新北市",
         "t_min_c": 22,
-        "t_max_c": 23,
+        "t_max_c": 27,
         "summary": "陰",
         "note": null,
-        "t_now_c": 20.5,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 19.7,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "CYI": {
         "name": "嘉義市",
         "t_min_c": 20,
-        "t_max_c": 21,
-        "summary": "多雲",
+        "t_max_c": 26,
+        "summary": "陰",
         "note": null,
-        "t_now_c": 19.3,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 19.6,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "HSQ": {
         "name": "新竹縣",
         "t_min_c": 20,
-        "t_max_c": 22,
+        "t_max_c": 27,
         "summary": "陰",
         "note": null,
-        "t_now_c": 19,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 18.9,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "HSZ": {
         "name": "新竹市",
         "t_min_c": 20,
-        "t_max_c": 22,
+        "t_max_c": 26,
         "summary": "陰",
         "note": null,
-        "t_now_c": 20.3,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 19.8,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "TPE": {
         "name": "臺北市",
         "t_min_c": 22,
-        "t_max_c": 23,
+        "t_max_c": 27,
         "summary": "陰",
         "note": null,
-        "t_now_c": 21.2,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 20.5,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "TNN": {
         "name": "臺南市",
         "t_min_c": 22,
-        "t_max_c": 23,
-        "summary": "晴",
+        "t_max_c": 27,
+        "summary": "陰",
         "note": null,
-        "t_now_c": 21,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 20.6,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "ILA": {
         "name": "宜蘭縣",
         "t_min_c": 21,
-        "t_max_c": 22,
+        "t_max_c": 27,
         "summary": "陰",
         "note": null,
         "t_now_c": 21,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "MIA": {
         "name": "苗栗縣",
         "t_min_c": 19,
-        "t_max_c": 21,
+        "t_max_c": 27,
         "summary": "陰",
         "note": null,
-        "t_now_c": 19.8,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 19.1,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "YUN": {
         "name": "雲林縣",
         "t_min_c": 20,
-        "t_max_c": 22,
+        "t_max_c": 26,
         "summary": "陰",
         "note": null,
-        "t_now_c": 20.7,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 20.1,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "HUA": {
         "name": "花蓮縣",
         "t_min_c": 22,
-        "t_max_c": 23,
+        "t_max_c": 27,
         "summary": "陰",
         "note": null,
-        "t_now_c": 20,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 19.8,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "TXG": {
         "name": "臺中市",
         "t_min_c": 22,
-        "t_max_c": 23,
+        "t_max_c": 27,
         "summary": "陰",
         "note": null,
-        "t_now_c": 21.5,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 20.8,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "TTT": {
         "name": "臺東縣",
         "t_min_c": 22,
-        "t_max_c": 23,
-        "summary": "多雲",
+        "t_max_c": 28,
+        "summary": "陰",
         "note": null,
-        "t_now_c": 20.7,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 20.9,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "TAO": {
         "name": "桃園市",
         "t_min_c": 21,
-        "t_max_c": 23,
+        "t_max_c": 27,
         "summary": "陰",
         "note": null,
         "t_now_c": 21,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "NAN": {
         "name": "南投縣",
         "t_min_c": 21,
-        "t_max_c": 22,
+        "t_max_c": 26,
         "summary": "陰",
         "note": null,
-        "t_now_c": 18.7,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 19,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "KHH": {
         "name": "高雄市",
-        "t_min_c": 24,
-        "t_max_c": 25,
-        "summary": "晴",
+        "t_min_c": 23,
+        "t_max_c": 29,
+        "summary": "陰",
         "note": null,
-        "t_now_c": 21.1,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 20.9,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "KIN": {
         "name": "金門縣",
-        "t_min_c": 22,
-        "t_max_c": 23,
+        "t_min_c": 21,
+        "t_max_c": 24,
         "summary": "陰",
         "note": null,
-        "t_now_c": 22.3,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 21.9,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "PIF": {
         "name": "屏東縣",
         "t_min_c": 22,
-        "t_max_c": 24,
+        "t_max_c": 29,
         "summary": "陰",
         "note": null,
-        "t_now_c": 22.9,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 22.2,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "KEE": {
         "name": "基隆市",
         "t_min_c": 21,
-        "t_max_c": 23,
+        "t_max_c": 26,
         "summary": "陰",
         "note": null,
-        "t_now_c": 20.3,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 20.6,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "PEN": {
         "name": "澎湖縣",
         "t_min_c": 23,
-        "t_max_c": 24,
+        "t_max_c": 27,
         "summary": "陰",
         "note": null,
-        "t_now_c": 24,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 24.1,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "CHA": {
         "name": "彰化縣",
         "t_min_c": 21,
-        "t_max_c": 23,
+        "t_max_c": 27,
         "summary": "陰",
         "note": null,
         "t_now_c": 20.8,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "observed_at": "2026-11-14T06:30:00+08:00"
       },
       "LIE": {
         "name": "連江縣",
         "t_min_c": 21,
-        "t_max_c": 22,
+        "t_max_c": 23,
         "summary": "陰",
         "note": null,
-        "t_now_c": 22.6,
-        "observed_at": "2026-11-14T00:20:00+08:00"
+        "t_now_c": 21.8,
+        "observed_at": "2026-11-14T06:30:00+08:00"
       }
     }
   },
@@ -223,43 +223,48 @@
     "items": [
       {
         "rank": 1,
-        "term": "青春共體",
-        "url": "https://trends.google.com/trends/explore?q=%E9%9D%92%E6%98%A5%E5%85%B1%E9%AB%94&geo=TW"
+        "term": "費城半導體指數",
+        "url": "https://trends.google.com/trends/explore?q=%E8%B2%BB%E5%9F%8E%E5%8D%8A%E5%B0%8E%E9%AB%94%E6%8C%87%E6%95%B8&geo=TW"
       },
       {
         "rank": 2,
-        "term": "徐翔聖",
-        "url": "https://trends.google.com/trends/explore?q=%E5%BE%90%E7%BF%94%E8%81%96&geo=TW"
+        "term": "天氣",
+        "url": "https://trends.google.com/trends/explore?q=%E5%A4%A9%E6%B0%A3&geo=TW"
+      },
+      {
+        "rank": 3,
+        "term": "thời tiết",
+        "url": "https://trends.google.com/trends/explore?q=th%E1%BB%9Di+ti%E1%BA%BFt&geo=TW"
       },
       {
         "rank": 4,
-        "term": "凌濤",
-        "url": "https://trends.google.com/trends/explore?q=%E5%87%8C%E6%BF%A4&geo=TW"
+        "term": "weather",
+        "url": "https://trends.google.com/trends/explore?q=weather&geo=TW"
       },
       {
         "rank": 5,
-        "term": "nbis",
-        "url": "https://trends.google.com/trends/explore?q=nbis&geo=TW"
+        "term": "สภาพอากาศ",
+        "url": "https://trends.google.com/trends/explore?q=%E0%B8%AA%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%AD%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8&geo=TW"
       },
       {
         "rank": 6,
-        "term": "東發號",
-        "url": "https://trends.google.com/trends/explore?q=%E6%9D%B1%E7%99%BC%E8%99%9F&geo=TW"
+        "term": "夜市",
+        "url": "https://trends.google.com/trends/explore?q=%E5%A4%9C%E5%B8%82&geo=TW"
       },
       {
         "rank": 7,
-        "term": "蔡凡熙",
-        "url": "https://trends.google.com/trends/explore?q=%E8%94%A1%E5%87%A1%E7%86%99&geo=TW"
+        "term": "台指期夜盤指數",
+        "url": "https://trends.google.com/trends/explore?q=%E5%8F%B0%E6%8C%87%E6%9C%9F%E5%A4%9C%E7%9B%A4%E6%8C%87%E6%95%B8&geo=TW"
       },
       {
-        "rank": 9,
-        "term": "公投",
-        "url": "https://trends.google.com/trends/explore?q=%E5%85%AC%E6%8A%95&geo=TW"
+        "rank": 8,
+        "term": "發票",
+        "url": "https://trends.google.com/trends/explore?q=%E7%99%BC%E7%A5%A8&geo=TW"
       },
       {
         "rank": 10,
-        "term": "詐騙集團",
-        "url": "https://trends.google.com/trends/explore?q=%E8%A9%90%E9%A8%99%E9%9B%86%E5%9C%98&geo=TW"
+        "term": "無印良品",
+        "url": "https://trends.google.com/trends/explore?q=%E7%84%A1%E5%8D%B0%E8%89%AF%E5%93%81&geo=TW"
       }
     ]
   },
@@ -270,6 +275,6 @@
   "signature": {
     "alg": "ed25519",
     "key_id": "2026-10",
-    "sig": "u4K+baq9s3h2JjUvJuxnmQdLEe8JeBcOxK7swCk5+szwx8jyl9p5HQv83rSt7or59FKIDO0NXeSv/gjvtBnVAw=="
+    "sig": "DmAXSP9ezHHwFAgZr/2+cvemXP0zuG3wGfifZ3Di7ReUdwPRAIx4mpS39bBQuE08zz9AljtPIb52mV3RbPesCQ=="
   }
 }
