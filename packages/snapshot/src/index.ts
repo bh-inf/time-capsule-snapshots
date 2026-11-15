@@ -16,10 +16,7 @@ export { hasSimplifiedChinese } from "./script.ts";
 export {
   CWA_FORECAST_URL,
   CWA_OBSERVATION_URL,
-  TRENDS_ATTRIBUTION,
   TW,
-  trendsExploreUrl,
-  trendsRssUrl,
 } from "./sources.ts";
 export { SnapshotError, collectSnapshot, parseCwaForecast, parseCwaObservation } from "./collect.ts";
 export {

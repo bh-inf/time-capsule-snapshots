@@ -23,7 +23,7 @@
 
 | 來源 | 用法 | 出處 |
 | --- | --- | --- |
-| Google Trends | RSS `https://trends.google.com/trending/rss?geo=<地區>`。不抓 explore 頁，也不存新聞標題或圖片 | Google Trends。再使用時請註明 Google。https://support.google.com/trends/answer/4365538?hl=en |
+| Google Trends | 已停止蒐集。較早的日期檔裡仍有當時存下的搜尋字詞與連結（`trends`），新的日期檔沒有這個欄位 | Google Trends。再使用時請註明 Google。https://support.google.com/trends/answer/4365538?hl=en |
 | 中央氣象署 | `F-C0032-001`（預報）與 `O-A0003-001`（現在天氣觀測，縣市內海拔 500 公尺以下測站取中位數；讀不到時退回預報），`Authorization` header，金鑰不進 URL | 中央氣象署開放資料（氣象資料開放平台） |
 | KKBOX | Open API `client_credentials` 取 token，`/v1.1/charts?territory=TW` 依標題找「華語單曲日榜」，再取 `/charts/<id>/tracks` 前 3 名。金鑰與 token 不進 URL | KKBOX，`songs.source` 為 `KKBOX 華語單曲日榜` |
 

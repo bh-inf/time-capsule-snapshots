@@ -2,38 +2,18 @@ export const CWA_FORECAST_URL =
   "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?format=JSON";
 export const CWA_OBSERVATION_URL =
   "https://opendata.cwa.gov.tw/api/v1/rest/datastore/O-A0003-001?format=JSON";
-export const TRENDS_TERMS_URL = "https://support.google.com/trends/answer/4365538?hl=en";
-
-export const TRENDS_ATTRIBUTION =
-  "Google Trends。依 Google 服務條款使用；再使用時請註明 Google。https://support.google.com/trends/answer/4365538?hl=en";
 
 export const CWA_ATTRIBUTION = "中央氣象署開放資料（氣象資料開放平台）";
 
 export type RegionProfile = {
   code: string;
-  trendsGeo: string;
   timeZone: string;
 };
 
 export const TW: RegionProfile = {
   code: "TW",
-  trendsGeo: "TW",
   timeZone: "Asia/Taipei",
 };
-
-export function trendsRssUrl(geo: string): string {
-  const url = new URL("https://trends.google.com/trending/rss");
-  url.searchParams.set("geo", geo);
-  return url.toString();
-}
-
-/** Stored as a link only. robots.txt disallows fetching /trends/explore. */
-export function trendsExploreUrl(term: string, geo: string): string {
-  const url = new URL("https://trends.google.com/trends/explore");
-  url.searchParams.set("q", term);
-  url.searchParams.set("geo", geo);
-  return url.toString();
-}
 
 export const COUNTY_CODES: Record<string, string> = {
   基隆市: "KEE",
