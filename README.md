@@ -1,6 +1,6 @@
 # time-capsule-snapshots
 
-公開的每日世界快照歸檔。Collector 與排程把 `v1/` 以不可變的日期檔寫進 `main`，再由 GitHub Pages 提供靜態檔。
+公開的世界快照歸檔。**2026-11-15 起已停止發布**：每日排程（`snapshot.yml`）已移除，不再蒐集、簽章或提交新的日期檔，App 也不再下載。`v1/` 內已發布的日期檔保持原樣，仍由 GitHub Pages 提供。要恢復發布，需從 git 歷史還原 `.github/workflows/snapshot.yml` 並確認 Environment `snapshot-publish` 的 secret 仍在。
 
 `schema_version` 維持 1。新欄位只以選用欄位加入，並提高 `schema_minor`。已發布的 `v1/<地區>/<年>/<YYYY-MM-DD>.json` 與 `v1/schema/snapshot-v1.<minor>.json` 只新增、不修改。
 
@@ -14,7 +14,6 @@
 | `fixtures/snapshot`、`fixtures/registry` | 舊資料、新資料與價格品項 fixture |
 | `v1/` | 公開歸檔。日期檔由排程寫入；schema 與 registry 的凍結複本隨 PR 進庫 |
 | `privacy/` | App 的隱私政策頁，商店上架填的政策網址 |
-| `.github/workflows/snapshot.yml` | 每日 21:30（台北）蒐集並發布 |
 | `.github/workflows/ci.yml` | `typecheck`、`test`、`audit`、`license` |
 
 流行歌曲來自 KKBOX Open API 的「華語單曲日榜」前 3 名，只存歌名、歌手、名次、KKBOX 歌曲頁連結、ISRC 與 KKBOX 歌曲 ID，不存封面、試聽或串流網址。沒有設定 `KKBOX_CLIENT_ID`／`KKBOX_CLIENT_SECRET` 時不會發出請求，`songs.status` 為 `unavailable`。設定金鑰前，請先確認 KKBOX 開發者條款允許把這些欄位永久公開保存。價格欄位沒有數值，只保留品項定義。Threads 網域一律拒絕，不會發出請求。
@@ -27,7 +26,7 @@
 | 中央氣象署 | `F-C0032-001`（預報）與 `O-A0003-001`（現在天氣觀測，縣市內海拔 500 公尺以下測站取中位數；讀不到時退回預報），`Authorization` header，金鑰不進 URL | 中央氣象署開放資料（氣象資料開放平台） |
 | KKBOX | Open API `client_credentials` 取 token，`/v1.1/charts?territory=TW` 依標題找「華語單曲日榜」，再取 `/charts/<id>/tracks` 前 3 名。金鑰與 token 不進 URL | KKBOX，`songs.source` 為 `KKBOX 華語單曲日榜` |
 
-## 每日 workflow 的 secret 與變數
+## 每日 workflow 的 secret 與變數（排程已停止，以下只在恢復發布時需要）
 
 全部放在 GitHub Environment **`snapshot-publish`**。這個 environment 只允許 `main`，而且**不要**設定 required reviewers，否則 cron 會一直等核准。
 

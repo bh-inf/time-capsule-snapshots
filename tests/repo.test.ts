@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { mkdtempSync, mkdirSync, writeFileSync, cpSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -46,34 +46,14 @@ describe("frozen schema and registry", () => {
 });
 
 describe("workflow guards", () => {
-  it("keeps the daily job on the publish environment and checks before push", () => {
-    const workflow = read(".github/workflows/snapshot.yml");
+  it("has no publishing workflow, and the CI workflow keeps its guards", () => {
+    expect(existsSync(".github/workflows/snapshot.yml")).toBe(false);
     const ci = read(".github/workflows/ci.yml");
-    expect(workflow).not.toContain("pull_request_target");
     expect(ci).not.toContain("pull_request_target");
-    expect(workflow).not.toContain("autostash");
-    expect(read("scripts/publish-snapshot.sh")).not.toContain("autostash");
-    expect(workflow).not.toMatch(/contents:\s*write/);
     expect(ci).not.toMatch(/contents:\s*write/);
-    const checkouts = workflow.match(/actions\/checkout/g) ?? [];
-    const persisted = workflow.match(/persist-credentials:\s*false/g) ?? [];
-    expect(persisted.length).toBeGreaterThanOrEqual(checkouts.length);
     expect(ci.match(/persist-credentials:\s*false/g)?.length).toBe(4);
-    expect(workflow.match(/environment:\s*snapshot-publish/g)?.length).toBe(3);
-    for (const name of ["SNAPSHOT_DEPLOY_KEY", "CWA_API_KEY", "SNAPSHOT_SIGNING_KEY_HEX", "SNAPSHOT_SIGNING_KEY_ID"]) {
-      expect(workflow).toContain(name);
-    }
-    expect(workflow.indexOf("pnpm snapshot:canary")).toBeLessThan(workflow.indexOf("upload-artifact"));
-    expect(workflow.indexOf("upload-artifact")).toBeLessThan(workflow.indexOf("publish:"));
-    expect(workflow).toContain('SNAPSHOT_REQUIRE_SIGNATURE: "1"');
-    const collect = workflow.slice(workflow.indexOf("  collect:"), workflow.indexOf("  sign:"));
-    const sign = workflow.slice(workflow.indexOf("  sign:"), workflow.indexOf("  publish:"));
-    expect(workflow.match(/secrets\.SNAPSHOT_SIGNING_KEY_HEX/g)?.length).toBe(1);
-    expect(collect).not.toMatch(/SIGNING_KEY/);
-    expect(sign).toContain("secrets.SNAPSHOT_SIGNING_KEY_HEX");
-    expect(sign).not.toMatch(/CWA_API_KEY|KKBOX/);
-    expect(sign).toContain("node pipeline/snapshot/src/sign-main.ts");
-    expect(sign).not.toMatch(/run:.*tsx/);
+    expect(ci).not.toMatch(/schedule:|SNAPSHOT_DEPLOY_KEY|SNAPSHOT_SIGNING_KEY/);
+    expect(read("scripts/publish-snapshot.sh")).not.toContain("autostash");
   });
 });
 

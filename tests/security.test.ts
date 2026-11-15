@@ -173,15 +173,5 @@ describe("secret scrubbing", () => {
   it("does not commit secret values", () => {
     const example = readFileSync(".env.example", "utf8");
     expect(example).not.toMatch(/=[0-9A-Za-z]{16,}/);
-    const workflow = readFileSync(".github/workflows/snapshot.yml", "utf8");
-    expect(workflow).not.toMatch(/CWA_API_KEY:\s*["']?[A-Za-z0-9]{8,}/);
-  });
-
-  it("passes secrets only to the steps that use them", () => {
-    const workflow = readFileSync(".github/workflows/snapshot.yml", "utf8");
-    // Job-level env is indented 6 spaces; step-level env is indented 10.
-    expect(workflow).not.toMatch(/^ {6}\w+: \$\{\{ secrets\./m);
-    const signing = workflow.match(/secrets\.SNAPSHOT_SIGNING_KEY_HEX/g) ?? [];
-    expect(signing).toHaveLength(1);
   });
 });
