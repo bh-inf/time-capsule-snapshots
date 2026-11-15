@@ -11,17 +11,11 @@ import {
   normalizeSnapshot,
   parseCwaForecast,
   parseCwaObservation,
-  trendsExploreUrl,
   writeSnapshotTree,
   type Snapshot,
 } from "@time-capsule/snapshot";
 
 const NOW = new Date("2026-10-16T13:00:00Z");
-
-const TRENDS = `<?xml version="1.0"?><rss><channel>
-<item><title>測試搜尋</title><link>https://trends.google.com/trending/rss?geo=TW</link>
-<ht:news_item><ht:news_item_title>不該保存的新聞</ht:news_item_title></ht:news_item></item>
-</channel></rss>`;
 
 const CWA = JSON.stringify({
   records: {
@@ -82,8 +76,7 @@ function feeds(overrides?: Record<string, number>): { calls: string[]; headers: 
       headers.push(init.headers);
       const status = overrides?.[url] ?? 200;
       let body = "";
-      if (url.includes("/trending/rss")) body = TRENDS;
-      else if (url.includes("O-A0003-001")) body = overrides?.["observation-missing"] ? "{}" : CWA_OBS;
+      if (url.includes("O-A0003-001")) body = overrides?.["observation-missing"] ? "{}" : CWA_OBS;
       else if (url.includes("opendata.cwa.gov.tw")) body = CWA;
       else throw new Error(`unexpected fetch ${url}`);
       return new HttpBytes(status, { get: () => null }, Buffer.from(body));
@@ -92,7 +85,7 @@ function feeds(overrides?: Record<string, number>): { calls: string[]; headers: 
 }
 
 describe("collector", () => {
-  it("does not fetch news, explore pages, or threads", async () => {
+  it("does not fetch news, search trends, or threads", async () => {
     const network = feeds();
     const snapshot = await collectSnapshot({
       now: NOW,
@@ -101,15 +94,9 @@ describe("collector", () => {
     });
     expect(snapshot).not.toHaveProperty("news");
     expect(network.calls.some((url) => url.includes("voachinese.com") || url.includes("ey.gov.tw"))).toBe(false);
-    expect(snapshot.trends.items).toEqual([
-      {
-        rank: 1,
-        term: "測試搜尋",
-        url: trendsExploreUrl("測試搜尋", "TW"),
-      },
-    ]);
-    expect(snapshot.trends.attribution).toContain("Google");
-    expect(JSON.stringify(snapshot.trends)).not.toContain("不該保存的新聞");
+    expect(snapshot).not.toHaveProperty("trends");
+    expect(snapshot.missing).not.toContain("trends");
+    expect(network.calls.some((url) => url.includes("google"))).toBe(false);
     expect(snapshot.weather.by_county.TPE).toMatchObject({ t_min_c: 21, t_max_c: 27, summary: "陰", t_now_c: 25.4 });
     expect(snapshot.weather.by_county.KHH?.name).toBe("高雄市");
     expect(snapshot.songs.status).toBe("unavailable");
@@ -130,7 +117,6 @@ describe("collector", () => {
 
   it("does not publish when every network source fails", async () => {
     const network = feeds({
-      "https://trends.google.com/trending/rss?geo=TW": 500,
       "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?format=JSON": 500,
     });
     await expect(collectSnapshot({ now: NOW, cwaApiKey: "cwa-test-key", oneShot: network.oneShot })).rejects.toThrow(/all network sources/);
@@ -163,8 +149,7 @@ describe("collector", () => {
     await expect(collectSnapshot({ now: NOW, requireConfiguredSources: true, oneShot: feeds().oneShot })).rejects.toThrow(/CWA_API_KEY/);
   });
 
-  it("builds trend links from the region instead of a schema constant", () => {
-    expect(trendsExploreUrl("雨", "JP")).toBe("https://trends.google.com/trends/explore?q=%E9%9B%A8&geo=JP");
+  it("reads the forecast summary for a county", () => {
     expect(parseCwaForecast(CWA, NOW).TPE?.summary).toBe("多雲");
   });
 
@@ -249,7 +234,7 @@ describe("compatibility", () => {
     expect(JSON.stringify(normalized)).not.toContain("news_title_not_stored");
     expect(JSON.stringify(normalized)).not.toContain("note_for_future_readers");
     expect(JSON.stringify(normalized)).not.toContain("body_not_stored");
-    expect(normalized.trends.items[0]?.url).toContain("geo=JP");
+    expect(normalized.trends?.items[0]?.url).toContain("geo=JP");
     expect(normalized.schema_minor).toBe(1);
   });
 

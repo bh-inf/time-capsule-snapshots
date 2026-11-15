@@ -1,23 +1,16 @@
 import { SCHEMA_URL } from "@time-capsule/schema";
 import { HttpBytes, safeFetch, scrubSecrets, type OneShot } from "./fetch.ts";
-import { cleanText, parseRssItems } from "./rss.ts";
 import { taipeiParts } from "./time.ts";
-import { hasSimplifiedChinese } from "./script.ts";
 import {
   COUNTY_CODES,
   CWA_ATTRIBUTION,
   CWA_FORECAST_URL,
   CWA_OBSERVATION_URL,
-  TRENDS_ATTRIBUTION,
   TW,
-  trendsExploreUrl,
-  trendsRssUrl,
   type RegionProfile,
 } from "./sources.ts";
 import type { Snapshot } from "./normalize.ts";
 import { collectKkboxSongs, type KkboxCredentials } from "./songs.ts";
-
-const TREND_LIMIT = 10;
 
 export class SnapshotError extends Error {
   constructor(message: string) {
@@ -223,31 +216,6 @@ async function collectWeather(
   }
 }
 
-async function collectTrends(
-  options: CollectOptions,
-  region: RegionProfile,
-): Promise<SourceResult<Snapshot["trends"]["items"]>> {
-  const rssUrl = trendsRssUrl(region.trendsGeo);
-  let response: HttpBytes;
-  try {
-    response = await fetchText(rssUrl, options, { maxBytes: 512_000 });
-  } catch {
-    return { ok: false };
-  }
-  if (response.status < 200 || response.status >= 300) return { ok: false };
-  const items = parseRssItems(response.text(), TREND_LIMIT);
-  if (items.length === 0) throw new SnapshotError("canary parse failed for trends");
-  const trends = items
-    .map((item, index) => {
-      const term = [...cleanText(item.title)].slice(0, 200).join("");
-      if (!term || hasSimplifiedChinese(term)) return null;
-      return { rank: index + 1, term, url: trendsExploreUrl(term, region.trendsGeo) };
-    })
-    .filter((item): item is Snapshot["trends"]["items"][number] => item !== null);
-  if (trends.length === 0) throw new SnapshotError("canary parse failed for trends");
-  return { ok: true, value: trends };
-}
-
 export async function collectSnapshot(options: CollectOptions = {}): Promise<Snapshot> {
   const now = options.now ?? new Date();
   const region = options.region ?? TW;
@@ -255,18 +223,15 @@ export async function collectSnapshot(options: CollectOptions = {}): Promise<Sna
   if (options.requireConfiguredSources && !options.cwaApiKey?.trim()) {
     throw new SnapshotError("CWA_API_KEY is required");
   }
-  const [weather, trends, songs] = await Promise.all([
+  const [weather, songs] = await Promise.all([
     collectWeather(options, now),
-    collectTrends(options, region),
     collectKkboxSongs(options.kkbox, { oneShot: options.oneShot, snapshotDate: date }),
   ]);
   // Songs never block a day: weather cannot be fetched again later.
   if (!songs.ok && songs.problem) options.onWarning?.(`songs parse failed: ${songs.problem}`);
-  const networkOk = [weather.ok, trends.ok].filter(Boolean).length;
-  if (networkOk === 0) throw new SnapshotError("all network sources failed");
+  if (!weather.ok && !songs.ok) throw new SnapshotError("all network sources failed");
   const missing: string[] = [];
   if (!weather.ok) missing.push("weather");
-  if (!trends.ok) missing.push("trends");
   const prices = options.priceObservations ?? [];
   if (prices.length === 0) missing.push("prices");
   if (!songs.ok) missing.push("songs");
@@ -296,11 +261,6 @@ export async function collectSnapshot(options: CollectOptions = {}): Promise<Sna
               : "排行榜抓取失敗",
         },
     prices,
-    trends: {
-      source: "Google Trends",
-      attribution: TRENDS_ATTRIBUTION,
-      items: trends.ok ? trends.value : [],
-    },
     missing,
     signature: null,
   };

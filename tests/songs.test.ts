@@ -12,6 +12,34 @@ import {
 } from "@time-capsule/snapshot";
 
 const NOW = new Date("2026-10-16T13:00:00Z");
+
+const CWA_OBS = JSON.stringify({
+  records: {
+    Station: [
+      {
+        StationName: "測站",
+        GeoInfo: { CountyName: "臺北市", StationAltitude: "12.0" },
+        ObsTime: { DateTime: "2026-10-16T21:00:00+08:00" },
+        WeatherElement: { AirTemperature: "24.0", Weather: "陰" },
+      },
+    ],
+  },
+});
+const slot = (value: string) => ({ startTime: "2026-10-16 18:00:00", endTime: "2026-10-17 06:00:00", parameter: { parameterName: value } });
+const CWA = JSON.stringify({
+  records: {
+    location: [
+      {
+        locationName: "臺北市",
+        weatherElement: [
+          { elementName: "Wx", time: [slot("多雲")] },
+          { elementName: "MinT", time: [slot("21")] },
+          { elementName: "MaxT", time: [slot("27")] },
+        ],
+      },
+    ],
+  },
+});
 const CREDS = { clientId: "kkbox-client-id", clientSecret: "kkbox-client-secret" };
 const TOKEN = "kkbox-access-token-123";
 
@@ -57,8 +85,8 @@ function kkbox(overrides?: { token?: number; charts?: string; tracks?: string })
       }
       if (url.startsWith("https://api.kkbox.com/v1.1/charts?")) return ok(overrides?.charts ?? CHARTS);
       if (url.startsWith("https://api.kkbox.com/v1.1/charts/DZrC8m29ciOFY2JAm3/tracks?")) return ok(overrides?.tracks ?? TRACKS);
-      if (url.includes("/trending/rss")) return ok("<rss><channel><item><title>測試搜尋</title><link>https://trends.google.com/trending/rss?geo=TW</link></item></channel></rss>");
-      if (url.includes("opendata.cwa.gov.tw")) return ok("", 500);
+      if (url.includes("O-A0003-001")) return ok(CWA_OBS);
+      if (url.includes("opendata.cwa.gov.tw")) return ok(CWA);
       throw new Error(`unexpected fetch ${url}`);
     },
   };
@@ -129,7 +157,7 @@ describe("KKBOX songs", () => {
   it("warns but still publishes the day when KKBOX changes its response shape", async () => {
     const network = kkbox({ charts: JSON.stringify({ data: [{ id: "x", title: "別的榜" }] }) });
     const warnings: string[] = [];
-    const snapshot = await collectSnapshot({ now: NOW, kkbox: CREDS, oneShot: network.oneShot, onWarning: (m) => warnings.push(m) });
+    const snapshot = await collectSnapshot({ now: NOW, cwaApiKey: "cwa-test-key", kkbox: CREDS, oneShot: network.oneShot, onWarning: (m) => warnings.push(m) });
     expect(warnings).toEqual(["songs parse failed: charts: no 華語單曲日榜"]);
     expect(snapshot.songs).toMatchObject({ items: [], status: "unavailable", note: "排行榜格式改變，這天沒有記錄" });
     expect(snapshot.missing).toContain("songs");
@@ -139,7 +167,7 @@ describe("KKBOX songs", () => {
 
   it("fills the snapshot songs section and leaves songs out of missing", async () => {
     const network = kkbox();
-    const snapshot = await collectSnapshot({ now: NOW, kkbox: CREDS, oneShot: network.oneShot });
+    const snapshot = await collectSnapshot({ now: NOW, cwaApiKey: "cwa-test-key", kkbox: CREDS, oneShot: network.oneShot });
     expect(snapshot.songs.source).toBe("KKBOX 華語單曲日榜");
     expect(snapshot.songs.status).toBe("ok");
     expect(snapshot.songs.items).toHaveLength(2);
@@ -150,7 +178,7 @@ describe("KKBOX songs", () => {
 
   it("marks songs unavailable when the configured source fails", async () => {
     const network = kkbox({ token: 500 });
-    const snapshot = await collectSnapshot({ now: NOW, kkbox: CREDS, oneShot: network.oneShot });
+    const snapshot = await collectSnapshot({ now: NOW, cwaApiKey: "cwa-test-key", kkbox: CREDS, oneShot: network.oneShot });
     expect(snapshot.songs).toMatchObject({ items: [], status: "unavailable", note: "排行榜抓取失敗" });
     expect(snapshot.missing).toContain("songs");
   });

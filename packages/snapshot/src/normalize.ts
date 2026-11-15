@@ -51,7 +51,8 @@ export type Snapshot = {
     as_of: string;
     source: string;
   }>;
-  trends: {
+  /** Days published before search trends were dropped carry them; newer days have no `trends`. */
+  trends?: {
     source: string;
     attribution: string;
     items: TrendItem[];
@@ -60,7 +61,7 @@ export type Snapshot = {
   signature: { alg: "ed25519"; key_id: string; sig: string } | null;
 };
 
-const EMPTY_TRENDS: Snapshot["trends"] = {
+const EMPTY_TRENDS: NonNullable<Snapshot["trends"]> = {
   source: "Google Trends",
   attribution:
     "Google Trends。依 Google 服務條款使用；再使用時請註明 Google。https://support.google.com/trends/answer/4365538?hl=en",
@@ -72,7 +73,7 @@ function asRecord(value: unknown): Record<string, unknown> {
   return value as Record<string, unknown>;
 }
 
-function trends(value: unknown): Snapshot["trends"] {
+function trends(value: unknown): NonNullable<Snapshot["trends"]> {
   const record = asRecord(value);
   const items = Array.isArray(record.items) ? record.items : [];
   return {
